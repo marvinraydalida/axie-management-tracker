@@ -5,10 +5,7 @@ $config = array(
         array(
             'field' => 'email',
             'label' => 'Email',
-            'rules' => 'required|callback_validate_email',
-            'errors' => array(
-                'validate_email' => 'Invalid email format'
-            )
+            'rules' => 'required|valid_email',
         ),
         array(
             'field' => 'first_name',
@@ -40,7 +37,26 @@ $config = array(
             'label' => 'Confirm password',
             'rules' => 'required|matches[password]'
         )
+    ),
+    'login' => array(
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|callback_registered_email',
+            'errors' => array(
+                'registered_email' => 'Wrong Email or not registered.'
+            )
+        ),
+        array(
+            'field' => 'password',
+            'label' => 'Password',
+            'rules' => 'required|callback_check_password',
+            'errors' => array(
+                'check_password' => 'Wrong password.'
+            )
+        ),
     )
+
 );
 
 

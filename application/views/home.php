@@ -15,5 +15,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="submit" value = "submit">
 	</form>
 
+	<form method="POST">
+		<input type="hidden" name = "logout" value = "true">
+		<input type="submit" value = "log-out">
+	</form>
+
 </body>
 </html>

@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </head>
 <body>
-
+	<?php echo validation_errors(); ?>
 	<form method="POST">
 		<input type="text" name = "email" placeholder="email">
         <input type="password" name = "password" placeholder="password">
