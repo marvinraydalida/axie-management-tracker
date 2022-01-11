@@ -19,6 +19,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="hidden" name = "logout" value = "true">
 		<input type="submit" value = "log-out">
 	</form>
-
+	<ul>
+		<?php foreach ($scholars as $scholar):?>
+			<li><?php echo $scholar['leaderboard']['name'] . " - " .
+			 $scholar['slp']['todaySoFar'] . " - " . 
+			 $scholar['slp']['yesterdaySLP'] . " - " .
+			 $scholar['slp']['average'];?></li>
+		<?php endforeach;?>
+	</ul>
 </body>
 </html>

@@ -11,12 +11,18 @@ class Home extends CI_Controller {
 		if(!isset($_SESSION['user_id'])){
 			redirect('/Login');
 		}
-		$this->load->view('home');
 
-		print_r($_SESSION);
+		$scholars = $this->get_scholars();
+		#print_r($scholars);
+		$data['scholars'] = $this->get_scholar_details($scholars);
+		#print_r($data['scholars']);
 
-		if($this->input->post('address') != null){
-			$this->request_address();
+		
+		$this->load->view('home',$data);
+
+
+		if(isset($_POST['address'])){
+			$this->request_address($this->input->post('address'));
 		}
 
 		if(isset($_POST['logout'])){
@@ -26,13 +32,26 @@ class Home extends CI_Controller {
 	}
 
 
-	public function request_address(){
-		$request_url = "https://axie-infinity.p.rapidapi.com/get-update/";
-		$ronin_address = "0x" . substr($this->input->post('address'),6);
+	public function get_scholars(){
+		$this->load->model('Home_model');
+		return $this->Home_model->get_scholars($_SESSION['user_id']);
+	}
 
-		#$addresses = array("0x2c4ec27f2c134804eb0b5ef322a3b2594e52931d","0x5e0416928b459f380dde1c078fd41204fb7d209d");
-		#$responses = array();
-		
+	public function get_scholar_details($scholars){
+		$scholars_details = array();
+		foreach($scholars as $scholar){
+			array_push($scholars_details,$this->request_address($scholar['ronin_address'],"fetch"));
+		}
+		return $scholars_details;
+	}
+
+	public function request_address($address, $mode = 'search'){
+		$this->load->model('Home_model');
+		$request_url = "https://axie-infinity.p.rapidapi.com/get-update/";
+		$ronin_address = $address;
+		if(strcmp($mode,'search') == 0)
+			$ronin_address = "0x" . substr($address,6);
+
 		$opts = array(
 			'http'=>array(
 			  'method'=>"GET",
@@ -42,15 +61,17 @@ class Home extends CI_Controller {
 		  );
 		$context = stream_context_create($opts);
 
-		/*foreach ($addresses as &$addres) {
-			$response_json = file_get_contents($request_url . $addres, false, $context);
-			array_push($responses,json_decode($response_json,true));
-		}*/
 
 		$response_json = file_get_contents($request_url . $ronin_address, false, $context);
-		echo $response_json;
-
-		#print_r($responses);
+		$result_array = json_decode($response_json,true);
+		  
+		if(strcmp($mode,'search') == 0){
+			if(isset($result_array['leaderboard']['name']))
+				$this->Home_model->add_scholar($ronin_address, $_SESSION['user_id']);
+		}
+		else{
+			return $result_array;
+		}
 	}
 
 }
