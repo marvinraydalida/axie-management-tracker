@@ -11,6 +11,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{	
+		
 		session_start();
 		if(isset($_SESSION['user_id'])){
 			redirect('/Home');
@@ -24,7 +25,9 @@ class Login extends CI_Controller {
         
         $this->form_validation->set_rules($this->config->item('login'));
         if ($this->form_validation->run() == FALSE){
+			$this->load->view('templates/header');
             $this->load->view('login');
+			$this->load->view('templates/footer');
         }
         else{
 			session_start();

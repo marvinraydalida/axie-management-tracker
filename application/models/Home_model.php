@@ -24,7 +24,12 @@ class Home_model extends CI_Model {
         );
         $this->db->where($data);
         $query = $this->db->get($this->db_table);
-        if(count($query->result_array()) == 0)
+        print_r("in5");
+        if(count($query->result_array()) == 0){
             $this->db->insert($this->db_table, $data);
+            print_r("inserted");
+            return true;
+        }
+        return false;
     }
 }
