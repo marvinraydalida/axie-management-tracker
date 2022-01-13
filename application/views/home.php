@@ -65,10 +65,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<h1>SCHOLAR</h1>
 				</div>
 			</div>
-			<?php 
+			<?php
 			$index = 1;
-			foreach ($scholars as $scholar) : ?>
-				<div class="row" id = "<?php echo $index;?>">
+			foreach ($scholars_status as $scholar) : ?>
+				<div class="row" id="<?php echo $index; ?>">
 					<div class="row-col row-1">
 						<h1><?php echo $scholar['leaderboard']['name'] ?></h1>
 					</div>
@@ -127,7 +127,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<i class="bi bi-chevron-down"></i>
 					</div>
 				</div>
-				<div class="row-hidden" id = "hidden-<?php echo $index;?>">
+				<div class="row-hidden" id="hidden-<?php echo $index; ?>">
 					<div class="scholar-information">
 						<div class="border">
 							<div class="image-container">
@@ -135,6 +135,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 						</div>
 						<div class="details">
+							<div class="actions-container">
+								<button onclick="showEditModal()" type="submit" name="edit" id = "edit" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>"><i class="bi bi-pencil"></i></button>
+								<button type="submit" name="delete" id = "delete" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>"><i class="bi bi-trash"></i></i></button>
+							</div>
 							<h1><span>Scholar name</span><br> Jane Doe</h1>
 							<h1><span>Email</span><br> sample@gmail.com</h1>
 							<h1><span>Contact</span><br> 09294619352</h1>
@@ -155,6 +159,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<?php $index++; ?>
 			<?php endforeach; ?>
 		</section>
+		<section class="modal">
+			<div class = "edit-modal">
+				<form method = "POST">
+					<input type="text" name="name" placeholder="Full name" autocomplete="off">
+					<input type="text" name="email" placeholder="email" autocomplete="off">
+					<input type="text" name="contact" placeholder="Contact" autocomplete="off">
+					<textarea name="address" placeholder="Address"></textarea>
+					<input type="file" name="contact" placeholder="Contact">
+					<input type="submit" name="update" value="UPDATE" id = "update">
+					<input type="submit" name="cancel" value="CANCEL" id = "cancel">
+				</form>				
+			</div>
+		</section>
 	</main>
 
 
@@ -162,99 +179,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
-
-		
-		var stars = [300, 250, 309, 189, 180];
-		var frameworks = ['React', 'Angular', 'Vue', 'Hyperapp', 'Omi'];
-		var ctx = document.getElementById('myChart');
-		var myChart = new Chart(ctx, {
-			type: 'line',
-			data: {
-				labels: frameworks,
-				datasets: [{
-					data: stars,
-					tension: 0.3,
-					borderColor: "#1FCB75",
-					label: "QUOTA IN LAST SEVEN DAYS"
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				plugins: {
-					legend: {
-						labels: {
-							color: "#ebebeb",
-							font: {
-								size: 18
-							}
-						}
-					}
-				},
-				scales: {
-					x: {
-						ticks: {
-							color: "#ebebeb"
-						}
-					},
-					y: {
-						ticks: {
-							color: "#ebebeb"
-						}
-					}
-				},
-			}
-		});
-
-		var ctx2 = document.getElementById('myChart2');
-		var myChart = new Chart(ctx2, {
-			type: 'line',
-			data: {
-				labels: frameworks,
-				datasets: [{
-					data: stars,
-					tension: 0.3,
-					borderColor: "#1FCB75",
-					label: "QUOTA IN LAST SEVEN DAYS"
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				plugins: {
-					legend: {
-						labels: {
-							color: "#ebebeb",
-							font: {
-								size: 18
-							}
-						}
-					}
-				},
-				scales: {
-					x: {
-						ticks: {
-							color: "#ebebeb"
-						}
-					},
-					y: {
-						ticks: {
-							color: "#ebebeb"
-						}
-					}
-				},
-			}
-		});
-
-		for(let i = 0; <?php echo "i < $index";?>; i++){
-			const row = document.getElementById(`${i+1}`);
-			row.addEventListener('click',function(){
-				if(row.classList.toggle("clicked"))
-					document.getElementById(`hidden-${i+1}`).style.height = "100%";
-				else
-					document.getElementById(`hidden-${i+1}`).style.height = "0";
-			});
-		}
+		<?php echo "const index =" . $index; ?>;
 	</script>
 	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>
 </body>

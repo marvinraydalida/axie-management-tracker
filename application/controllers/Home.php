@@ -14,15 +14,17 @@ class Home extends CI_Controller {
 
 		if(isset($_COOKIE['json_scholars'])){
 			print_r("henlo");
-			$data['scholars'] = json_decode($_COOKIE['json_scholars'],true);
-			$data['address'] = $this->get_scholars();
+			$data['scholars'] = $this->get_scholars();
+			//print_r($data['scholars']);
+			$data['scholars_status'] = json_decode($_COOKIE['json_scholars'],true);
 		}
 		else if(!isset($_COOKIE['json_scholars'])){
 			print_r("alo");
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
-			$data['address'] = $scholars;
-			$data['scholars'] = $scholar_details;
+			$data['scholars'] = $scholars;
+			
+			$data['scholars_status'] = $scholar_details;
 		}
 
 		//$this->load->view('templates/header');
@@ -35,7 +37,9 @@ class Home extends CI_Controller {
 		}
 
 		if(isset($_POST['logout'])){
+			unset($_SESSION);
 			session_destroy();
+			unset($_COOKIE);
 			setcookie('json_scholars', '', time() - 3600);
 			redirect('/Login');
 		}
@@ -44,6 +48,14 @@ class Home extends CI_Controller {
 			setcookie('json_scholars', '', time() - 3600);
 			redirect('/Home');
 		}
+
+		if(isset($_POST['edit'])){
+			print_r($_POST['edit']);
+		}
+
+		/*if(isset($_POST['delete'])){
+			print_r($_POST['delete']);
+		}*/
 	}
 
 	public function valid_address($address){

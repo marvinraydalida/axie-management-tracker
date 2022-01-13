@@ -86,6 +86,12 @@ body {
 .dropdown-container i {
     font-size: 1.2rem;
     color: yellowgreen;
+    transition: transform 250ms ease-in-out;
+    display: block;
+}
+
+.clicked .dropdown-container i{
+    transform: rotate(0.5turn);
 }
 
 .row-hidden {
@@ -95,6 +101,7 @@ body {
     box-sizing: border-box;
     overflow: hidden;
 }
+
 
 .scholar-information {
     width: 90%;
@@ -175,6 +182,38 @@ body {
     background: transparent;
 }
 
+.actions-container{   
+    position: absolute;
+    right: 5%;
+}
+
+.actions-container button{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: transform 250ms ease-in-out;
+}
+
+.actions-container button:hover{
+    transform: scale(1.1);
+}
+
+.actions-container button[name='edit']{
+    background-color: #227FE1;
+}
+
+.actions-container button[name='delete']{
+    background-color: #D13B3B;
+}
+
+.actions-container button i{
+    color: white;
+    font-size: 1.5rem;
+}
+
 .graphs-container {
     width: 90%;
     display: flex;
@@ -186,4 +225,80 @@ body {
 
 .line-graph-container {
     width: 48%;
+}
+
+.modal{
+    background-color: rgb(0, 0, 0, 0.5);
+    position:fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.edit-modal{
+    background-color: #41486d;
+    width: 40%;
+    height: 65%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.edit-modal input[type="text"]{
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    height: 40px;
+    width: 400px;
+    border-radius: 5px;
+    border: none;
+}
+
+textarea{
+    display: block;
+    resize: none;
+    margin-bottom: 15px;
+    width: 400px;
+    height: 150px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.edit-modal input[type="file"]{
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    height: 40px;
+    width: 400px;
+    border-radius: 5px;
+}
+
+.edit-modal input[type="submit"]{
+    display: inline-block;
+    border: none;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    margin-right: 30px;
+    cursor: pointer;
+    transition: transform 250ms ease-in-out;
+}
+
+.edit-modal input[type="submit"]:hover{
+    transform: scale(1.1);
+}
+
+.edit-modal input[name="update"]{
+    background-color: #21c04e;
+}
+
+.edit-modal input[name="cancel"]{
+    background-color: #be1e1e;
 }
