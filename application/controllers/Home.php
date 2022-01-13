@@ -15,13 +15,16 @@ class Home extends CI_Controller {
 		if(isset($_COOKIE['json_scholars'])){
 			print_r("henlo");
 			$data['scholars'] = json_decode($_COOKIE['json_scholars'],true);
+			$data['address'] = $this->get_scholars();
 		}
 		else if(!isset($_COOKIE['json_scholars'])){
 			print_r("alo");
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
+			$data['address'] = $scholars;
 			$data['scholars'] = $scholar_details;
 		}
+
 		//$this->load->view('templates/header');
 		$this->load->view('home',$data);
 		//$this->load->view('templates/footer');

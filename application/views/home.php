@@ -65,8 +65,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<h1>SCHOLAR</h1>
 				</div>
 			</div>
-			<?php foreach ($scholars as $scholar) : ?>
-				<div class="row">
+			<?php 
+			$index = 1;
+			foreach ($scholars as $scholar) : ?>
+				<div class="row" id = "<?php echo $index;?>">
 					<div class="row-col row-1">
 						<h1><?php echo $scholar['leaderboard']['name'] ?></h1>
 					</div>
@@ -109,22 +111,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="row-col">
 						<h1>
-							<?php echo abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']);?>
+							<?php echo abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']); ?>
 						</h1>
 					</div>
 					<div class="row-col">
-						<h1><?php echo $scholar['slp']['claimableTotal'];?></h1>
+						<h1><?php echo $scholar['slp']['claimableTotal']; ?></h1>
 					</div>
 					<div class="row-col">
 						<h1><span><?php echo round(abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']) * (60 / 100)); ?></span>
-						<br>
-						<span style="font-size: .6rem;">50% share</span></i></h1>
+							<br>
+							<span style="font-size: .6rem;">50% share</span></i>
+						</h1>
 					</div>
 					<div class="dropdown-container">
 						<i class="bi bi-chevron-down"></i>
 					</div>
 				</div>
-				<div class="row-hidden">
+				<div class="row-hidden" id = "hidden-<?php echo $index;?>">
 					<div class="scholar-information">
 						<div class="border">
 							<div class="image-container">
@@ -149,15 +152,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 					</div>
 				</div>
+				<?php $index++; ?>
 			<?php endforeach; ?>
 		</section>
 	</main>
 
 
-	 
+
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
+
+		
 		var stars = [300, 250, 309, 189, 180];
 		var frameworks = ['React', 'Angular', 'Vue', 'Hyperapp', 'Omi'];
 		var ctx = document.getElementById('myChart');
@@ -239,7 +245,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				},
 			}
 		});
+
+		for(let i = 0; <?php echo "i < $index";?>; i++){
+			const row = document.getElementById(`${i+1}`);
+			row.addEventListener('click',function(){
+				if(row.classList.toggle("clicked"))
+					document.getElementById(`hidden-${i+1}`).style.height = "100%";
+				else
+					document.getElementById(`hidden-${i+1}`).style.height = "0";
+			});
+		}
 	</script>
+	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>
 </body>
 
 </html>
