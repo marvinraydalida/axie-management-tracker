@@ -44,13 +44,13 @@ $config = array(
             'label' => 'Email',
             'rules' => 'required|callback_registered_email',
             'errors' => array(
-                'registered_email' => 'Wrong Email or not registered.'
+                'registered_email' => 'Wrong Credentials or not registered.'
             )
         ),
         array(
             'field' => 'password',
             'label' => 'Password',
-            'rules' => 'required|callback_check_password',
+            'rules' => 'callback_check_password',
             'errors' => array(
                 'check_password' => 'Wrong password.'
             )
