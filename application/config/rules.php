@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $config = array(
     'signup' => array(
         array(
@@ -28,8 +28,7 @@ $config = array(
             'label' => 'Password',
             'rules' => 'required|callback_validate_password',
             'errors' => array(
-                'validate_password' => 'Password should be at least 8 characters in length 
-                and should include at least one upper case letter, one number, and one special character.'
+                'validate_password' => 'Password must contain at least 8 charactes, including UPPER/lower case, number and special characters.'
             )
         ),
         array(
@@ -58,6 +57,3 @@ $config = array(
     )
 
 );
-
-
-
