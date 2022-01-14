@@ -2,18 +2,32 @@ const rows = document.getElementsByClassName('row');
 const hiddenRows = document.getElementsByClassName('row-hidden');
 const editBtns = document.getElementsByClassName('edit');
 const hiddenInputs = document.getElementsByClassName('hidden-input');
+
+const name_class = document.getElementsByClassName('name');
+const email_class = document.getElementsByClassName('email');
+const contact_class = document.getElementsByClassName('contact');
+const address_class = document.getElementsByClassName('address');
+
+const scholar_id = document.getElementById('scholar_id');
+const name_id = document.getElementById('name');
+const email_id = document.getElementById('email');
+const contact_id = document.getElementById('contact');
+const address_id = document.getElementById('address');
 for (let i = 0; i < index; i++) {
 	rows[i].addEventListener('click', function () {
 		if (rows[i].classList.toggle("clicked")) {
 			hiddenRows[i].style.height = "100%";
-			console.log("asss");
+			console.log("asdas");
 		} else
 			hiddenRows[i].style.height = "0";
 	});
 	editBtns[i].addEventListener('click', function () {
 		document.querySelector(".modal").style.display = "flex";
-		const scholar_id = document.getElementById('scholar_id');
 		scholar_id.setAttribute('value',hiddenInputs[i].getAttribute('value'));
+		name_id.setAttribute('value',name_class[i].innerHTML);
+		email_id.setAttribute('value',email_class[i].innerHTML);
+		contact_id.setAttribute('value',contact_class[i].innerHTML);
+		address_id.innerHTML = address_class[i].innerHTML;
 		console.log(scholar_id.getAttribute('value'));
 	});
 }

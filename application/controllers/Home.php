@@ -25,7 +25,6 @@ class Home extends CI_Controller
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
 			$data['scholars'] = $scholars;
-
 			$data['scholars_status'] = $scholar_details;
 		}
 
@@ -54,6 +53,7 @@ class Home extends CI_Controller
 		if (isset($_POST['update'])) {
 			$this->upload_image();
 			$this->Home_model->update_scholar();
+			redirect('/Home');
 		}
 
 		/*if(isset($_POST['delete'])){
