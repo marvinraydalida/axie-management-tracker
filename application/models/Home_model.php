@@ -25,4 +25,12 @@ class Home_model extends CI_Model {
         }
         return false;
     }
+
+    public function update_scholar(){
+        $this->db->where('scholar_id', $_POST['scholar_id']);
+        unset($_POST['update']);
+        unset($_POST['file']);
+        unset($_POST['scholar_id']);
+        $this->db->update($this->db_table, $this->input->post());
+    }
 }

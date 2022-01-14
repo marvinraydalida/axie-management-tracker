@@ -68,7 +68,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<?php
 			$index = 1;
 			foreach ($scholars_status as $scholar) : ?>
-				<div class="row" id="<?php echo $index; ?>">
+				<div class="row">
 					<div class="row-col row-1">
 						<h1><?php echo $scholar['leaderboard']['name'] ?></h1>
 					</div>
@@ -127,22 +127,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<i class="bi bi-chevron-down"></i>
 					</div>
 				</div>
-				<div class="row-hidden" id="hidden-<?php echo $index; ?>">
+				<div class="row-hidden">
 					<div class="scholar-information">
 						<div class="border">
 							<div class="image-container">
-								<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80" alt="">
+								<img src="<?php echo $scholars[$index - 1]['image_location'] ?>" alt="">
 							</div>
 						</div>
 						<div class="details">
 							<div class="actions-container">
-								<button onclick="showEditModal()" type="submit" name="edit" id = "edit" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>"><i class="bi bi-pencil"></i></button>
-								<button type="submit" name="delete" id = "delete" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>"><i class="bi bi-trash"></i></i></button>
+								<input type="hidden" class="hidden-input" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>">
+								<button type="submit" name="edit" class = "edit"><i class="bi bi-pencil"></i></button>
+								<button type="submit" name="delete" class = "delete"><i class="bi bi-trash"></i></i></button>
 							</div>
-							<h1><span>Scholar name</span><br> Jane Doe</h1>
-							<h1><span>Email</span><br> sample@gmail.com</h1>
-							<h1><span>Contact</span><br> 09294619352</h1>
-							<h1><span>Address</span><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro magnam praesentium fuga aperiam qui provident, eius expedita sed exercitationem libero commodi consequatur ullam repellendus minima aut dignissimos asperiores quia sapiente.</h1>
+							<h1><span>Scholar name</span><br> <?php echo $scholars[$index - 1]['name'] ?></h1>
+							<h1><span>Email</span><br> <?php echo $scholars[$index - 1]['email'] ?></h1>
+							<h1><span>Contact</span><br> <?php echo $scholars[$index - 1]['contact'] ?></h1>
+							<h1><span>Address</span><br> <?php echo $scholars[$index - 1]['address'] ?></h1>
 							<h1><span>Valid Id</span></h1>
 							<img src="https://grit.ph/wp-content/uploads/2020/05/sss-umid-emv-card-1-1030x659.png" alt="">
 						</div>
@@ -160,26 +161,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<?php endforeach; ?>
 		</section>
 		<section class="modal">
-			<div class = "edit-modal">
-				<form method = "POST">
+			<div class="edit-modal">
+				<form method="POST" enctype="multipart/form-data">
+					<input type="hidden" name = "scholar_id" value = "" id = "scholar_id">
 					<input type="text" name="name" placeholder="Full name" autocomplete="off">
 					<input type="text" name="email" placeholder="email" autocomplete="off">
 					<input type="text" name="contact" placeholder="Contact" autocomplete="off">
 					<textarea name="address" placeholder="Address"></textarea>
-					<input type="file" name="contact" placeholder="Contact">
-					<input type="submit" name="update" value="UPDATE" id = "update">
-					<input type="submit" name="cancel" value="CANCEL" id = "cancel">
-				</form>				
+					<input type="file" name="file">
+					<input type="submit" name="update" value="UPDATE">
+					<input type="submit" name="cancel" value="CANCEL">
+				</form>
 			</div>
 		</section>
 	</main>
 
 
-
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script>
-		<?php echo "const index =" . $index; ?>;
+	<script type="application/javascript">
+		<?php echo "const index =" . $index . "-1";?>;
 	</script>
 	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>
 </body>

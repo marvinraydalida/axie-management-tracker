@@ -241,8 +241,8 @@ body {
 
 .edit-modal{
     background-color: #41486d;
-    width: 40%;
-    height: 65%;
+    width: 500px;
+    height: 500px;
     text-align: center;
     display: flex;
     flex-direction: column;
