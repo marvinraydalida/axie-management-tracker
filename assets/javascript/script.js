@@ -32,6 +32,9 @@ for (let i = 0; i < index; i++) {
 	});
 }
 
+document.getElementById('close').addEventListener('click', function(){
+	document.querySelector('.modal').style.display = "none";
+});
 /*for(let i = 0; i < index; i++){
 	const row = document.getElementById(`${i+1}`);
 	row.addEventListener('click',function(){

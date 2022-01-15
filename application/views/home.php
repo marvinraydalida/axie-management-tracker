@@ -137,19 +137,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="details">
 							<div class="actions-container">
 								<input type="hidden" class="hidden-input" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>">
-								<button type="submit" name="edit" class = "edit"><i class="bi bi-pencil"></i></button>
-								<button type="submit" name="delete" class = "delete"><i class="bi bi-trash"></i></i></button>
+								<button type="submit" name="edit" class="edit"><i class="bi bi-pencil"></i></button>
+								<button type="submit" name="delete" class="delete"><i class="bi bi-trash"></i></i></button>
 							</div>
 							<p>Scholar name</p>
-							<h1 class = "name"><?php echo $scholars[$index - 1]['name'] ?></h1>
+							<h1 class="name"><?php echo $scholars[$index - 1]['name'] ?></h1>
 							<p>Email</p>
-							<h1 class = "email"><?php echo $scholars[$index - 1]['email'] ?></h1>
+							<h1 class="email"><?php echo $scholars[$index - 1]['email'] ?></h1>
 							<p>Contact</p>
-							<h1 class = "contact"><?php echo $scholars[$index - 1]['contact'] ?></h1>
+							<h1 class="contact"><?php echo $scholars[$index - 1]['contact'] ?></h1>
 							<p>Address</p>
-							<h1 class = "address"><?php echo $scholars[$index - 1]['address'] ?></h1>
-							<p></p>
-							<img src="https://grit.ph/wp-content/uploads/2020/05/sss-umid-emv-card-1-1030x659.png" alt="">
+							<h1 class="address"><?php echo $scholars[$index - 1]['address'] ?></h1>
+							<p>Valid ID</p>
+							<img src="<?php echo $scholars[$index - 1]['valid_id'] ?>" alt="">
 						</div>
 					</div>
 					<div class="graphs-container">
@@ -167,16 +167,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<section class="modal">
 			<div class="edit-modal">
 				<form method="POST" enctype="multipart/form-data">
-					<input type="hidden" name = "scholar_id" value = "" id = "scholar_id">
-					<input type="text" name="name" placeholder="Full name" autocomplete="off" value = "" id = "name">
-					<input type="text" name="email" placeholder="email" autocomplete="off" value = "" id = "email">
-					<input type="text" name="contact" placeholder="Contact" autocomplete="off" value = "" id = "contact">
-					<textarea name="address" placeholder="Address" value = "" id = "address"></textarea>
-					<input type="file" name="file">
-					<input type="file" name="valid_id">
-					<input type="submit" name="update" value="UPDATE">
-					<input type="submit" name="cancel" value="CANCEL">
+					<input type="hidden" name="scholar_id" value="" id="scholar_id">
+					<div class="inputs">
+						<input type="text" name="name" placeholder="Full name" autocomplete="off" value="" id="name">
+						<input type="text" name="email" placeholder="email" autocomplete="off" value="" id="email">
+						<input type="text" name="contact" placeholder="Contact" autocomplete="off" value="" id="contact">
+						<textarea name="address" placeholder="Address" value="" id="address"></textarea>
+					</div>
+					<div class="input-image">
+						<div id="scholar_profile">
+							<p><i class="bi bi-person-badge"></i> Profile Picture</p>
+							<input type="file" name="scholar_profile" accept="image/*">
+						</div>
+						<div id="valid_id">
+							<p><i class="bi bi-credit-card-2-back-fill"></i> &nbsp Valid ID</p>
+							<input type="file" name="valid_id" accept="image/*">
+						</div>
+					</div>
+					<div class = "update-button">
+						<input type="submit" name="update" value="UPDATE">
+					</div>
 				</form>
+				<input type="submit" id = "close" value="X">
 			</div>
 		</section>
 	</main>
@@ -184,7 +196,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="application/javascript">
-		<?php echo "const index =" . $index . "-1";?>;
+		<?php echo "const index =" . $index . "-1"; ?>;
 	</script>
 	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>
 </body>

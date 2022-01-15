@@ -243,15 +243,154 @@ p{
 .edit-modal{
     background-color: #41486d;
     width: 500px;
-    height: 700px;
+    height: 570px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    position: relative;
+    padding-top: 20px;
 }
 
-.edit-modal input[type="text"]{
+.edit-modal form{
+    width: 100%;
+}
+
+.inputs{
+    width: 80%;
+    margin: 0px auto;
+}
+
+.inputs > *{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5px;
+    resize: none;
+    height: 50px;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-weight: bold;
+    background-color: #c0c7da;
+    border: none;
+}
+
+textarea{
+    height: 80px !important;
+}
+
+.input-image{
+    width: 80%;
+    height: 50px;
+    margin: 0px auto 40px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.input-image div{
+   border-radius: 8px;;
+}
+
+.input-image input{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+}
+
+#scholar_profile{
+    background-color: #f3a920;
+    position: relative;
+    width: 45%;
+    transition: background-color 250ms ease-in-out;
+}
+
+#scholar_profile:hover{
+    background-color: #c4881a;
+}
+
+#scholar_profile:hover i{
+    color: #a06904 !important;
+} 
+
+
+#scholar_profile p{
+    color: white !important;
+}
+
+#scholar_profile i{
+    color: #c98301 !important;
+    transition: color 250ms ease-in-out;
+}
+
+#valid_id{
+    background-color: #2083f3;
+    position: relative;
+    width: 45%;
+    transition: background-color 250ms ease-in-out;
+}
+
+
+#valid_id p{
+    color: white !important;
+}
+
+#valid_id i{
+    color: #015ac0 !important;
+    transition: color 250ms ease-in-out;
+}
+
+#valid_id:hover{
+    background-color: #1a64b9;
+}
+
+#valid_id:hover i{
+    color: #02448f !important;
+} 
+
+.update-button{
+    width: 80%;
+    height: 60px;
+    margin: auto;
+}
+
+.update-button input{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #1cb33f;
+    color: rgb(241, 233, 233);
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 250ms ease-in-out;
+}
+
+.update-button input:hover{
+    background-color: #169133;
+}
+
+#close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: var(--font-family);
+    background-color: transparent;
+    border: none;
+    color: rgb(207, 41, 12);
+    cursor: pointer;
+}
+
+/*.edit-modal input[type="text"]{
     display: block;
     margin-bottom: 10px;
     padding: 5px;
@@ -273,13 +412,9 @@ textarea{
 }
 
 .edit-modal input[type="file"]{
-    display: block;
-    margin-bottom: 10px;
-    padding: 5px;
-    height: 40px;
-    width: 400px;
-    border-radius: 5px;
+   
 }
+
 
 .edit-modal input[type="submit"]{
     display: inline-block;
@@ -302,4 +437,4 @@ textarea{
 
 .edit-modal input[name="cancel"]{
     background-color: #be1e1e;
-}
+}*/

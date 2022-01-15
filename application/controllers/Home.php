@@ -53,6 +53,7 @@ class Home extends CI_Controller
 		if (isset($_POST['update'])) {
 			$this->upload_image();
 			$this->Home_model->update_scholar();
+			print_r($_FILES);
 			redirect('/Home');
 		}
 
@@ -93,16 +94,31 @@ class Home extends CI_Controller
 	public function upload_image()
 	{
 		if (isset($_FILES)) {
-			switch ($_FILES['file']['type']) {
-				case "image/jpeg":
-				case "image/svg+xml":
-				case "image/png":
-					$image_file = $_FILES['file']['name'];
-					$file_extension = pathinfo($image_file, PATHINFO_EXTENSION);
-					$url = "http://localhost/axie-management-tracker/Home/get_image/?path=";
-					move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/scholar/' . $_POST['scholar_id'] . "." . $file_extension);
-					$_POST['image_location'] = $url . 'uploads/scholar/' . $_POST['scholar_id'] . "." . $file_extension;
-					break;
+			if(isset($_FILES['scholar_profile'])){
+				switch ($_FILES['scholar_profile']['type']) {
+					case "image/jpeg":
+					case "image/svg+xml":
+					case "image/png":
+						$image_file = $_FILES['scholar_profile']['name'];
+						$file_extension = pathinfo($image_file, PATHINFO_EXTENSION);
+						$url = "http://localhost/axie-management-tracker/Home/get_image/?path=";
+						move_uploaded_file($_FILES['scholar_profile']['tmp_name'], 'uploads/scholar/' . $_POST['scholar_id'] . "." . $file_extension);
+						$_POST['image_location'] = $url . 'uploads/scholar/' . $_POST['scholar_id'] . "." . $file_extension;
+						break;
+				}
+			}
+			if(isset($_FILES['valid_id'])){
+				switch ($_FILES['valid_id']['type']) {
+					case "image/jpeg":
+					case "image/svg+xml":
+					case "image/png":
+						$image_file = $_FILES['valid_id']['name'];
+						$file_extension = pathinfo($image_file, PATHINFO_EXTENSION);
+						$url = "http://localhost/axie-management-tracker/Home/get_image/?path=";
+						move_uploaded_file($_FILES['valid_id']['tmp_name'], 'uploads/id/' . $_POST['scholar_id'] . "." . $file_extension);
+						$_POST['valid_id'] = $url . 'uploads/id/' . $_POST['scholar_id'] . "." . $file_extension;
+						break;
+				}
 			}
 		}
 	}
