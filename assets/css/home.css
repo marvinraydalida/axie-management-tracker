@@ -11,10 +11,79 @@ body {
     background-color: #232735;
 }
 
+.currencies {
+    width: 90vw;
+    height: 100px;
+    margin: 0px auto 50px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.currency {
+    width: 30%;
+    height: 100%;
+    background-color: tomato;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.eth {
+    background: rgb(23, 98, 204);
+    background: linear-gradient(32deg, rgba(23, 98, 204, 1) 0%, rgba(25, 221, 227, 1) 100%);
+}
+
+.axs {
+    background: rgb(217,108,33);
+background: linear-gradient(32deg, rgba(217,108,33,1) 0%, rgba(255,194,152,1) 100%);
+}
+
+.slp {
+    background: rgb(224,30,140);
+background: linear-gradient(32deg, rgba(224,30,140,1) 0%, rgba(255,183,224,1) 100%);
+}
+
+.currency h1 {
+    font-size: 50px;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(241, 235, 235);
+    position: absolute;
+    margin: 0;
+    top: 20px;
+    left: 30px;
+}
+
+
+.currency p {
+    position: absolute;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    top: 9px;
+    right: 30px;
+}
+
+.currency i {
+    position: absolute;
+    font-size: 20px;
+    top: 40px;
+    left: 140px;
+    color: rgb(241, 235, 235);
+}
+
+.green{
+    color: #0af10a !important;
+}
+
+.red{
+    color: rgb(196, 42, 42) !important;
+}
+
 .my-scholars {
     width: 90vw;
     margin: 0px auto;
 }
+
 
 .heading {
     width: 100%;
@@ -22,6 +91,7 @@ body {
     background-color: #2f364e;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
+    border-radius: 10px 10px 0px 0px;
 }
 
 .heading-col {
@@ -49,7 +119,7 @@ body {
     transition: background-color 250ms ease-in-out;
 }
 
-.row:hover{
+.row:hover {
     background-color: #485380;
 }
 
@@ -59,7 +129,7 @@ body {
     border-bottom: 1px rgb(43, 43, 80) solid;
 }
 
-.row-1{
+.row-1 {
     box-sizing: border-box;
     word-wrap: break-word;
     padding: 0px 25px;
@@ -89,7 +159,7 @@ body {
     display: block;
 }
 
-.clicked .dropdown-container i{
+.clicked .dropdown-container i {
     transform: rotate(0.5turn);
 }
 
@@ -160,12 +230,12 @@ body {
     font-size: 2rem;
 }
 
-p{
+p {
     color: #2eca5a;
     font-weight: bold;
 }
 
-.details img{
+.details img {
     width: 50%;
 }
 
@@ -183,12 +253,12 @@ p{
     background: transparent;
 }
 
-.actions-container{   
+.actions-container {
     position: absolute;
     right: 5%;
 }
 
-.actions-container button{
+.actions-container button {
     width: 50px;
     height: 50px;
     border: none;
@@ -198,19 +268,19 @@ p{
     transition: transform 250ms ease-in-out;
 }
 
-.actions-container button:hover{
+.actions-container button:hover {
     transform: scale(1.1);
 }
 
-.actions-container button[name='edit']{
+.actions-container button[name='edit'] {
     background-color: #227FE1;
 }
 
-.actions-container button[name='delete']{
+.actions-container button[name='delete'] {
     background-color: #D13B3B;
 }
 
-.actions-container button i{
+.actions-container button i {
     color: white;
     font-size: 1.5rem;
 }
@@ -228,9 +298,9 @@ p{
     width: 48%;
 }
 
-.modal{
+.modal {
     background-color: rgb(0, 0, 0, 0.5);
-    position:fixed;
+    position: fixed;
     display: none;
     justify-content: center;
     align-items: center;
@@ -240,7 +310,7 @@ p{
     height: 100vh;
 }
 
-.edit-modal{
+.edit-modal {
     background-color: #41486d;
     width: 500px;
     height: 570px;
@@ -253,16 +323,16 @@ p{
     padding-top: 20px;
 }
 
-.edit-modal form{
+.edit-modal form {
     width: 100%;
 }
 
-.inputs{
+.inputs {
     width: 80%;
     margin: 0px auto;
 }
 
-.inputs > *{
+.inputs>* {
     display: block;
     width: 100%;
     margin-bottom: 20px;
@@ -276,11 +346,11 @@ p{
     border: none;
 }
 
-textarea{
+textarea {
     height: 80px !important;
 }
 
-.input-image{
+.input-image {
     width: 80%;
     height: 50px;
     margin: 0px auto 40px auto;
@@ -289,11 +359,12 @@ textarea{
     justify-content: space-between;
 }
 
-.input-image div{
-   border-radius: 8px;;
+.input-image div {
+    border-radius: 8px;
+    ;
 }
 
-.input-image input{
+.input-image input {
     opacity: 0;
     position: absolute;
     top: 0;
@@ -302,32 +373,32 @@ textarea{
     cursor: pointer;
 }
 
-#scholar_profile{
+#scholar_profile {
     background-color: #f3a920;
     position: relative;
     width: 45%;
     transition: background-color 250ms ease-in-out;
 }
 
-#scholar_profile:hover{
+#scholar_profile:hover {
     background-color: #c4881a;
 }
 
-#scholar_profile:hover i{
+#scholar_profile:hover i {
     color: #a06904 !important;
-} 
+}
 
 
-#scholar_profile p{
+#scholar_profile p {
     color: white !important;
 }
 
-#scholar_profile i{
+#scholar_profile i {
     color: #c98301 !important;
     transition: color 250ms ease-in-out;
 }
 
-#valid_id{
+#valid_id {
     background-color: #2083f3;
     position: relative;
     width: 45%;
@@ -335,30 +406,30 @@ textarea{
 }
 
 
-#valid_id p{
+#valid_id p {
     color: white !important;
 }
 
-#valid_id i{
+#valid_id i {
     color: #015ac0 !important;
     transition: color 250ms ease-in-out;
 }
 
-#valid_id:hover{
+#valid_id:hover {
     background-color: #1a64b9;
 }
 
-#valid_id:hover i{
+#valid_id:hover i {
     color: #02448f !important;
-} 
+}
 
-.update-button{
+.update-button {
     width: 80%;
     height: 60px;
     margin: auto;
 }
 
-.update-button input{
+.update-button input {
     width: 100%;
     height: 100%;
     border-radius: 8px;
@@ -371,11 +442,11 @@ textarea{
     transition: background-color 250ms ease-in-out;
 }
 
-.update-button input:hover{
+.update-button input:hover {
     background-color: #169133;
 }
 
-#close{
+#close {
     position: absolute;
     top: 0;
     right: 0;

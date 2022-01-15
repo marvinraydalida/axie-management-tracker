@@ -35,6 +35,43 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<input type="submit" value="refresh-test">
 	</form>
 	<main>
+		<section class="currencies">
+			<div class="currency eth">
+				<h1>ETH</h1>
+				<?php if (strcmp($_SESSION['eth_status'], 'up') == 0) : ?>
+					<i class="bi bi-arrow-up-square-fill green"></i>
+				<?php elseif (strcmp($_SESSION['eth_status'], 'down') == 0) : ?>
+					<i class="bi bi-arrow-down-square-fill red"></i>
+				<?php else : ?>
+					<i class="bi bi-arrow-left-right"></i>
+				<?php endif; ?>
+				<p>PHP <?php echo number_format($currencies[0], 2, '.', ','); ?> </p>
+			</div>
+			<div class="currency axs">
+				<h1>AXS</h1>
+				<?php if (strcmp($_SESSION['axs_status'], 'up') == 0) : ?>
+					<i class="bi bi-arrow-up-square-fill green"></i>
+				<?php elseif (strcmp($_SESSION['axs_status'], 'down') == 0) : ?>
+					<i class="bi bi-arrow-down-square-fill red"></i>
+				<?php else : ?>
+					<i class="bi bi-arrow-left-right"></i>
+				<?php endif; ?>
+				<p>PHP <?php echo number_format($currencies[1], 2, '.', ','); ?></p>
+			</div>
+			</div>
+			<div class="currency slp">
+				<h1>SLP</h1>
+				<?php if (strcmp($_SESSION['slp_status'],'up') == 0) : ?>
+					<i class="bi bi-arrow-up-square-fill green"></i>
+				<?php elseif (strcmp($_SESSION['slp_status'],'down') == 0) : ?>
+					<i class="bi bi-arrow-down-square-fill red"></i>
+				<?php else: ?>
+					<i class="bi bi-arrow-left-right"></i>
+				<?php endif; ?>
+				<p>PHP <?php echo number_format($currencies[2], 4, '.', ','); ?></p>
+			</div>
+			</div>
+		</section>
 		<section class="my-scholars">
 			<div class="heading">
 				<div class="heading-col">
@@ -184,11 +221,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<input type="file" name="valid_id" accept="image/*">
 						</div>
 					</div>
-					<div class = "update-button">
+					<div class="update-button">
 						<input type="submit" name="update" value="UPDATE">
 					</div>
 				</form>
-				<input type="submit" id = "close" value="X">
+				<input type="submit" id="close" value="X">
 			</div>
 		</section>
 	</main>

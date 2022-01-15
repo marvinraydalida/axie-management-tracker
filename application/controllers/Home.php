@@ -12,7 +12,6 @@ class Home extends CI_Controller
 		if (!isset($_SESSION['user_id'])) {
 			redirect('/Login');
 		}
-
 		$this->load->model('Home_model');
 
 		if (isset($_COOKIE['json_scholars'])) {
@@ -28,9 +27,21 @@ class Home extends CI_Controller
 			$data['scholars_status'] = $scholar_details;
 		}
 
-		//$this->load->view('templates/header');
+		$data['currencies'] = $this->get_currencies();
+		if (!isset($_SESSION['eth'])) {
+			$_SESSION['eth'] = $data['currencies'][0];
+			$_SESSION['eth_status'] = '';
+
+			$_SESSION['axs'] = $data['currencies'][1];
+			$_SESSION['axs_status'] = '';
+
+			$_SESSION['slp'] = $data['currencies'][2];
+			$_SESSION['slp_status'] = '';
+		} else {
+			$this->update_currencies($data['currencies']);
+		}
+
 		$this->load->view('home', $data);
-		//$this->load->view('templates/footer');
 
 		if (isset($_POST['submit'])) {
 			$this->add_scholar($this->valid_address($_POST['address']));
@@ -60,6 +71,54 @@ class Home extends CI_Controller
 		/*if(isset($_POST['delete'])){
 			print_r($_POST['delete']);
 		}*/
+	}
+
+	public function get_currencies()
+	{
+		$end_point = 'https://api.coinbase.com/v2/exchange-rates?currency=';
+		$eth_json = file_get_contents($end_point . 'ETH');
+		$axs_json = file_get_contents($end_point . 'AXS');
+		$slp_json = file_get_contents($end_point . 'SLP');
+		$eth = json_decode($eth_json, true);
+		$axs = json_decode($axs_json, true);
+		$slp = json_decode($slp_json, true);
+		$currencies = array();
+		array_push($currencies, $eth['data']['rates']['PHP']);
+		array_push($currencies, $axs['data']['rates']['PHP']);
+		array_push($currencies, $slp['data']['rates']['PHP']);
+		return $currencies;
+	}
+
+	public function update_currencies($data)
+	{
+		if ($_SESSION['eth'] < $data[0]) {
+			$_SESSION['eth_status'] = "up";
+		} else if ($_SESSION['eth'] > $data[0]) {
+			$_SESSION['eth_status'] = "down";
+		} else {
+			$_SESSION['eth_status'] = "same";
+		}
+
+		if ($_SESSION['axs'] < $data[1]) {
+			$_SESSION['axs_status'] = "up";
+		} else if ($_SESSION['axs'] > $data[1]) {
+			$_SESSION['axs_status'] = "down";
+		} else {
+			$_SESSION['axs_status'] = "same";
+		}
+
+		if ($_SESSION['slp'] < $data[2]) {
+			$_SESSION['slp_status'] = "up";
+		} else if ($_SESSION['slp'] > $data[2]) {
+			$_SESSION['slp_status'] = "down";
+		} else {
+			$_SESSION['slp_status'] = "same";
+		}
+
+
+		$_SESSION['eth'] = $data[0];
+		$_SESSION['axs'] = $data[1];
+		$_SESSION['slp'] = $data[2];
 	}
 
 	public function valid_address($address)
@@ -94,7 +153,7 @@ class Home extends CI_Controller
 	public function upload_image()
 	{
 		if (isset($_FILES)) {
-			if(isset($_FILES['scholar_profile'])){
+			if (isset($_FILES['scholar_profile'])) {
 				switch ($_FILES['scholar_profile']['type']) {
 					case "image/jpeg":
 					case "image/svg+xml":
@@ -107,7 +166,7 @@ class Home extends CI_Controller
 						break;
 				}
 			}
-			if(isset($_FILES['valid_id'])){
+			if (isset($_FILES['valid_id'])) {
 				switch ($_FILES['valid_id']['type']) {
 					case "image/jpeg":
 					case "image/svg+xml":
@@ -122,13 +181,14 @@ class Home extends CI_Controller
 			}
 		}
 	}
-	
 
-	public function get_image(){
+
+	public function get_image()
+	{
 		$this->load->helper('file');
-        $filename = $this->input->get('path');
-        header('Content-type: ' . get_mime_by_extension($filename));
-        echo file_get_contents($filename); 
+		$filename = $this->input->get('path');
+		header('Content-type: ' . get_mime_by_extension($filename));
+		echo file_get_contents($filename);
 	}
 
 	public function get_scholar_details($scholars)
