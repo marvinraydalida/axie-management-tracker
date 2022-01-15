@@ -5,7 +5,10 @@ $config = array(
         array(
             'field' => 'email',
             'label' => 'Email',
-            'rules' => 'required|valid_email',
+            'rules' => 'required|valid_email|callback_is_registered',
+            'errors' => array(
+                'is_registered' => 'The email is already registered.'
+            )
         ),
         array(
             'field' => 'first_name',

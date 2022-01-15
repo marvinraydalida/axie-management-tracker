@@ -173,6 +173,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<input type="text" name="contact" placeholder="Contact" autocomplete="off" value = "" id = "contact">
 					<textarea name="address" placeholder="Address" value = "" id = "address"></textarea>
 					<input type="file" name="file">
+					<input type="file" name="valid_id">
 					<input type="submit" name="update" value="UPDATE">
 					<input type="submit" name="cancel" value="CANCEL">
 				</form>

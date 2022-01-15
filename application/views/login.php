@@ -8,10 +8,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>Login</title>
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/login.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 	<!-- CSS only -->
 
 
@@ -53,7 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<input type="submit" name="login" value="LOG - IN">
 			</div>
 			<div class="register-button">
-				<p>Not registered yet?<a href="Register"> Signup now</a></p>
+				<p>Not registered yet?<a href="Register"> Sign up now</a></p>
 			</div>
 			<?php echo form_error('password', '<div class="error">', '</div>'); ?>
 			<?php echo form_error('email', '<div class="error">', '</div>'); ?>
