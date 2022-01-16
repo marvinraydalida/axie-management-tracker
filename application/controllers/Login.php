@@ -28,12 +28,11 @@ class Login extends CI_Controller {
             $this->load->view('login');
         }
         else{
-			session_start();
 			$_SESSION['user_id'] = $this->user_id;
 			$_SESSION['email'] = $this->email;
 			$_SESSION['first_Name'] = $this->first_name;
 			$_SESSION['last_name'] = $this->last_name;
-            redirect('/Home');
+			$this->load->view('loader');
         }
 
 	}
