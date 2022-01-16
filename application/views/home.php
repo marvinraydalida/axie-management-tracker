@@ -12,6 +12,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	<script type="application/javascript" src = "<?php echo base_url() ?>assets/javascript/currency.js" async></script>
 	<!-- CSS only -->
 
 
@@ -38,38 +39,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<section class="currencies">
 			<div class="currency eth">
 				<h1>ETH</h1>
-				<?php if (strcmp($_SESSION['eth_status'], 'up') == 0) : ?>
-					<i class="bi bi-arrow-up-square-fill green"></i>
-				<?php elseif (strcmp($_SESSION['eth_status'], 'down') == 0) : ?>
-					<i class="bi bi-arrow-down-square-fill red"></i>
-				<?php else : ?>
-					<i class="bi bi-arrow-left-right"></i>
-				<?php endif; ?>
-				<p>PHP <?php echo number_format($currencies[0], 2, '.', ','); ?> </p>
+				<p></p>
 			</div>
 			<div class="currency axs">
 				<h1>AXS</h1>
-				<?php if (strcmp($_SESSION['axs_status'], 'up') == 0) : ?>
-					<i class="bi bi-arrow-up-square-fill green"></i>
-				<?php elseif (strcmp($_SESSION['axs_status'], 'down') == 0) : ?>
-					<i class="bi bi-arrow-down-square-fill red"></i>
-				<?php else : ?>
-					<i class="bi bi-arrow-left-right"></i>
-				<?php endif; ?>
-				<p>PHP <?php echo number_format($currencies[1], 2, '.', ','); ?></p>
-			</div>
+				<p></p>
 			</div>
 			<div class="currency slp">
 				<h1>SLP</h1>
-				<?php if (strcmp($_SESSION['slp_status'], 'up') == 0) : ?>
-					<i class="bi bi-arrow-up-square-fill green"></i>
-				<?php elseif (strcmp($_SESSION['slp_status'], 'down') == 0) : ?>
-					<i class="bi bi-arrow-down-square-fill red"></i>
-				<?php else : ?>
-					<i class="bi bi-arrow-left-right"></i>
-				<?php endif; ?>
-				<p>PHP <?php echo number_format($currencies[2], 4, '.', ','); ?></p>
-			</div>
+				<p></p>
 			</div>
 		</section>
 		<section class="add-scholar">
@@ -238,7 +216,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<form method="POST">
 					<input type="hidden" name="scholar_id" value="" id="delete_id">
 					<h1>Are you sure you want to delete this?</h1>
-					<div class = "delete-action">
+					<div class="delete-action">
 						<input type="submit" name="delete" value="Confirm">
 						<input type="submit" name="remove" value="Just remove Scholar">
 					</div>
@@ -251,6 +229,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="application/javascript">
+		
 		<?php echo "const index =" . $index . "-1"; ?>;
 	</script>
 	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>

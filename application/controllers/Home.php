@@ -27,20 +27,6 @@ class Home extends CI_Controller
 			$data['scholars_status'] = $scholar_details;
 		}
 
-		$data['currencies'] = $this->get_currencies();
-		if (!isset($_SESSION['eth'])) {
-			$_SESSION['eth'] = $data['currencies'][0];
-			$_SESSION['eth_status'] = '';
-
-			$_SESSION['axs'] = $data['currencies'][1];
-			$_SESSION['axs_status'] = '';
-
-			$_SESSION['slp'] = $data['currencies'][2];
-			$_SESSION['slp_status'] = '';
-		} else {
-			$this->update_currencies($data['currencies']);
-		}
-
 		$this->load->view('home', $data);
 
 		if (isset($_POST['submit'])) {
@@ -78,54 +64,6 @@ class Home extends CI_Controller
 			$this->Home_model->remove_scholar();
 			redirect('/Home');
 		}
-	}
-
-	public function get_currencies()
-	{
-		$end_point = 'https://api.coinbase.com/v2/exchange-rates?currency=';
-		$eth_json = file_get_contents($end_point . 'ETH');
-		$axs_json = file_get_contents($end_point . 'AXS');
-		$slp_json = file_get_contents($end_point . 'SLP');
-		$eth = json_decode($eth_json, true);
-		$axs = json_decode($axs_json, true);
-		$slp = json_decode($slp_json, true);
-		$currencies = array();
-		array_push($currencies, $eth['data']['rates']['PHP']);
-		array_push($currencies, $axs['data']['rates']['PHP']);
-		array_push($currencies, $slp['data']['rates']['PHP']);
-		return $currencies;
-	}
-
-	public function update_currencies($data)
-	{
-		if ($_SESSION['eth'] < $data[0]) {
-			$_SESSION['eth_status'] = "up";
-		} else if ($_SESSION['eth'] > $data[0]) {
-			$_SESSION['eth_status'] = "down";
-		} else {
-			$_SESSION['eth_status'] = "same";
-		}
-
-		if ($_SESSION['axs'] < $data[1]) {
-			$_SESSION['axs_status'] = "up";
-		} else if ($_SESSION['axs'] > $data[1]) {
-			$_SESSION['axs_status'] = "down";
-		} else {
-			$_SESSION['axs_status'] = "same";
-		}
-
-		if ($_SESSION['slp'] < $data[2]) {
-			$_SESSION['slp_status'] = "up";
-		} else if ($_SESSION['slp'] > $data[2]) {
-			$_SESSION['slp_status'] = "down";
-		} else {
-			$_SESSION['slp_status'] = "same";
-		}
-
-
-		$_SESSION['eth'] = $data[0];
-		$_SESSION['axs'] = $data[1];
-		$_SESSION['slp'] = $data[2];
 	}
 
 	public function valid_address($address)
