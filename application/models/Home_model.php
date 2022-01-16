@@ -33,4 +33,21 @@ class Home_model extends CI_Model {
         unset($_POST['scholar_id']);
         $this->db->update($this->db_table, $this->input->post());
     }
+
+    public function remove_scholar(){
+        $data = array(
+            'name' => 'Assign scholar name',
+            'email' => 'Assign scholar email',
+            'contact' => 'Assign scholar contact',
+            'address' => 'Assign scholar address',
+            'image_location' => 'https://www.seekpng.com/png/detail/428-4287240_no-avatar-user-circle-icon-png.png',
+            'valid_id' => 'https://images.assetsdelivery.com/compings_v2/photoplotnikov/photoplotnikov1610/photoplotnikov161000024.jpg'
+        );
+        $this->db->where('scholar_id',$_POST['scholar_id']);
+        $this->db->update($this->db_table, $data);
+    }
+
+    public function remove_axie_account(){
+        $this->db->delete($this->db_table, array('scholar_id' => $_POST['scholar_id']));
+    }
 }

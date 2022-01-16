@@ -68,9 +68,16 @@ class Home extends CI_Controller
 			redirect('/Home');
 		}
 
-		/*if(isset($_POST['delete'])){
-			print_r($_POST['delete']);
-		}*/
+		if(isset($_POST['delete'])){
+			$this->Home_model->remove_axie_account();
+			setcookie('json_scholars', '', time() - 3600);
+			redirect('/Home');
+		}
+
+		if(isset($_POST['remove'])){
+			$this->Home_model->remove_scholar();
+			redirect('/Home');
+		}
 	}
 
 	public function get_currencies()

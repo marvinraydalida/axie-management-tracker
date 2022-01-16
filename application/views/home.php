@@ -61,16 +61,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 			<div class="currency slp">
 				<h1>SLP</h1>
-				<?php if (strcmp($_SESSION['slp_status'],'up') == 0) : ?>
+				<?php if (strcmp($_SESSION['slp_status'], 'up') == 0) : ?>
 					<i class="bi bi-arrow-up-square-fill green"></i>
-				<?php elseif (strcmp($_SESSION['slp_status'],'down') == 0) : ?>
+				<?php elseif (strcmp($_SESSION['slp_status'], 'down') == 0) : ?>
 					<i class="bi bi-arrow-down-square-fill red"></i>
-				<?php else: ?>
+				<?php else : ?>
 					<i class="bi bi-arrow-left-right"></i>
 				<?php endif; ?>
 				<p>PHP <?php echo number_format($currencies[2], 4, '.', ','); ?></p>
 			</div>
 			</div>
+		</section>
+		<section class="add-scholar">
+			<form method="POST">
+				<input type="text" name="address" placeholder="Enter ronnin address" autocomplete="off">
+				<input type="submit" value="ADD" name='submit'>
+			</form>
 		</section>
 		<section class="my-scholars">
 			<div class="heading">
@@ -226,6 +232,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 				</form>
 				<input type="submit" id="close" value="X">
+			</div>
+
+			<div class="delete-modal">
+				<form method="POST">
+					<input type="hidden" name="scholar_id" value="" id="delete_id">
+					<h1>Are you sure you want to delete this?</h1>
+					<div class = "delete-action">
+						<input type="submit" name="delete" value="Confirm">
+						<input type="submit" name="remove" value="Just remove Scholar">
+					</div>
+				</form>
+				<input type="submit" name="cancel" value="X" id="cancel">
 			</div>
 		</section>
 	</main>
