@@ -182,11 +182,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="graphs-container">
 						<div class="line-graph-container">
-							<canvas id="myChart" width="300px" height="300px"></canvas>
+							<canvas class = "slp-chart" width="300px" height="300px"></canvas>
 						</div>
-						<div class="line-graph-container">
+						<!-- <div class="line-graph-container">
 							<canvas id="myChart2" width="300px" height="300px"></canvas>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<?php $index++; ?>
@@ -235,28 +235,38 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<input type="submit" name="cancel" value="X" id="cancel">
 			</div>
 		</section>
-	</main>
-
-
+	</main>						
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="application/javascript">
-		<?php echo "const index =" . $index . "-1"; ?>;
+		
+		<?php
+			$slp_y = array();
+			$slp_x = array();
+			$tmp = array();
+			
+			for($i = 0; $i < $index - 1; $i++){
+				$lst = json_decode($scholars[$i]['slp_chart'], true);
+				for($j = 0; $j < 7; $j++){
+					array_push($tmp, $lst[$j]['slp']);
+				}
+				array_push($slp_y, $tmp);
+				$tmp = array();
+			}
 
-		var slp_y = [<?php
-						echo implode(', ', array_column(json_decode($scholars[0]['slp_chart'], true), 'slp'));
-						?>];
-		const slp_x_unix = [<?php
-							echo implode(', ', array_column(json_decode($scholars[0]['slp_chart'], true), 'time'));
-							?>];
-		var slp_x = [];
-		function convert_to_date(item) {
-			const ms = item * 1000;
-			const dateObject = new Date(ms);
-			const humanDateFormat = dateObject.toLocaleString("en-PH")
-			slp_x.push(humanDateFormat.split(', ')[0]);
-		};
-		slp_x_unix.forEach(convert_to_date);
-		console.log(slp_y, slp_x);
+			for($i = 0; $i < $index - 1; $i++){
+				$lst = json_decode($scholars[$i]['slp_chart'], true);
+				for($j = 0; $j < 7; $j++){
+					array_push($tmp, date('m/d/Y', $lst[$j]['time']));
+				}
+				array_push($slp_x, $tmp);
+				$tmp = array();
+			}
+		?>
+
+		var slp_y = <?php echo json_encode($slp_y); ?>;
+		var slp_x = <?php echo json_encode($slp_x); ?>;
+		console.log();
+
 	</script>
 	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>
 	<script src="<?php echo base_url() ?>assets/javascript/chart.js"></script>

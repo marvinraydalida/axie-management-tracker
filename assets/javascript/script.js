@@ -20,10 +20,10 @@ const quota_id = document.getElementById('quota');
 const address_id = document.getElementById('address');
 const delete_id = document.getElementById('delete_id');
 
-for (let i = 0; i < index; i++) {
+for (let i = 0; i < rows.length; i++) {
 	rows[i].addEventListener('click', function () {
 		if (rows[i].classList.toggle("clicked")) {
-			hiddenRows[i].style.height = "100%";
+			hiddenRows[i].style.height = "900px";
 			console.log("asdas");
 		} else
 			hiddenRows[i].style.height = "0";

@@ -332,11 +332,11 @@ p {
 
 .graphs-container {
     width: 90%;
+    height: 450px;
     display: flex;
     margin: auto;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px dashed;
 }
 
 .line-graph-container {
