@@ -12,7 +12,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-	<script type="application/javascript" src = "<?php echo base_url() ?>assets/javascript/currency.js" async></script>
+	<script type="application/javascript" src="<?php echo base_url() ?>assets/javascript/currency.js" async></script>
 	<!-- CSS only -->
 
 
@@ -94,7 +94,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<h1><?php echo $scholar['leaderboard']['name'] ?></h1>
 					</div>
 					<div class="row-col">
-						<h1><?php echo $scholar['slp']['todaySoFar'] ?></h1>
+						<?php if ($scholar['slp']['todaySoFar'] < $scholars[$index - 1]['quota']) : ?>
+							<h1 style="color:#F76E37">
+						<?php elseif ($scholar['slp']['todaySoFar'] >= $scholars[$index - 1]['quota']) : ?>
+							<h1 style="color:#37F76E">
+						<?php endif; ?>
+								<?php echo $scholar['slp']['todaySoFar'] ?><br>
+								<span style="font-size: .6rem; color: #ebebeb" class="quota"><?php echo $scholars[$index - 1]['quota'] ?> Daily quota</span></i>
+							</h1>
 					</div>
 					<div class="row-col">
 						<h1><?php echo $scholar['slp']['average'] ?></h1>
@@ -139,9 +146,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<h1><?php echo $scholar['slp']['claimableTotal']; ?></h1>
 					</div>
 					<div class="row-col">
-						<h1><span><?php echo round(abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']) * (60 / 100)); ?></span>
+						<h1><span><?php echo round(abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']) * ($scholars[$index - 1]['share'] / 100)); ?></span>
 							<br>
-							<span style="font-size: .6rem;">50% share</span></i>
+							<span style="font-size: .6rem;" class="share"><?php echo $scholars[$index - 1]['share'] ?>% share</span></i>
 						</h1>
 					</div>
 					<div class="dropdown-container">
@@ -193,6 +200,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<input type="text" name="name" placeholder="Full name" autocomplete="off" value="" id="name">
 						<input type="text" name="email" placeholder="email" autocomplete="off" value="" id="email">
 						<input type="text" name="contact" placeholder="Contact" autocomplete="off" value="" id="contact">
+						<div class="share-quota">
+							<input type="text" name="quota" placeholder="Daily quota" autocomplete="off" value="" id="quota">
+							<input type="text" name="share" placeholder="Share" autocomplete="off" value="" id="share">
+						</div>
 						<textarea name="address" placeholder="Address" value="" id="address"></textarea>
 					</div>
 					<div class="input-image">
@@ -229,7 +240,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="application/javascript">
-		
 		<?php echo "const index =" . $index . "-1"; ?>;
 	</script>
 	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>

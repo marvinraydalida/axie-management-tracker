@@ -381,7 +381,7 @@ p {
     display: block;
     width: 100%;
     margin-bottom: 20px;
-    padding: 5px;
+    padding: 5px 0px 5px 20px;
     resize: none;
     height: 50px;
     border-radius: 8px;
@@ -391,7 +391,27 @@ p {
     border: none;
 }
 
+.share-quota{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between  ;
+    padding: 0;   
+    background-color: #41486d;
+}
+
+.share-quota input{
+    height: 100%;
+    width: 47%;
+    padding: 5px 0px 5px 20px;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-weight: bold;
+    background-color: #c0c7da;
+    border: none;
+}
+
 textarea {
+    padding-top: 10px !important;
     height: 80px !important;
 }
 
@@ -406,7 +426,6 @@ textarea {
 
 .input-image div {
     border-radius: 8px;
-    ;
 }
 
 .input-image input {
