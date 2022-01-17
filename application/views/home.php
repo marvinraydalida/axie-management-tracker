@@ -96,12 +96,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="row-col">
 						<?php if ($scholar['slp']['todaySoFar'] < $scholars[$index - 1]['quota']) : ?>
 							<h1 style="color:#F76E37">
-						<?php elseif ($scholar['slp']['todaySoFar'] >= $scholars[$index - 1]['quota']) : ?>
-							<h1 style="color:#37F76E">
-						<?php endif; ?>
+							<?php elseif ($scholar['slp']['todaySoFar'] >= $scholars[$index - 1]['quota']) : ?>
+								<h1 style="color:#37F76E">
+								<?php endif; ?>
 								<?php echo $scholar['slp']['todaySoFar'] ?><br>
 								<span style="font-size: .6rem; color: #ebebeb" class="quota"><?php echo $scholars[$index - 1]['quota'] ?> Daily quota</span></i>
-							</h1>
+								</h1>
 					</div>
 					<div class="row-col">
 						<h1><?php echo $scholar['slp']['average'] ?></h1>
@@ -241,8 +241,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="application/javascript">
 		<?php echo "const index =" . $index . "-1"; ?>;
+
+		var slp_y = [<?php
+						echo implode(', ', array_column(json_decode($scholars[0]['slp_chart'], true), 'slp'));
+						?>];
+		const slp_x_unix = [<?php
+							echo implode(', ', array_column(json_decode($scholars[0]['slp_chart'], true), 'time'));
+							?>];
+		var slp_x = [];
+		function convert_to_date(item) {
+			const ms = item * 1000;
+			const dateObject = new Date(ms);
+			const humanDateFormat = dateObject.toLocaleString("en-PH")
+			slp_x.push(humanDateFormat.split(', ')[0]);
+		};
+		slp_x_unix.forEach(convert_to_date);
+		console.log(slp_y, slp_x);
 	</script>
 	<script src="<?php echo base_url() ?>assets/javascript/script.js"></script>
+	<script src="<?php echo base_url() ?>assets/javascript/chart.js"></script>
 </body>
 
 </html>

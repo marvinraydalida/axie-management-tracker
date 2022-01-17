@@ -16,15 +16,16 @@ class Home extends CI_Controller
 
 		if (isset($_COOKIE['json_scholars'])) {
 			print_r("henlo");
-			$data['scholars'] = $this->get_scholars();
-			//print_r($data['scholars']);
 			$data['scholars_status'] = json_decode($_COOKIE['json_scholars'], true);
+			$this->check_time($data['scholars_status']);
+			$data['scholars'] = $this->get_scholars();
 		} else if (!isset($_COOKIE['json_scholars'])) {
 			print_r("alo");
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
 			$data['scholars'] = $scholars;
 			$data['scholars_status'] = $scholar_details;
+			$this->check_time($data['scholars_status']);
 		}
 
 		$this->load->view('home', $data);
@@ -54,15 +55,26 @@ class Home extends CI_Controller
 			redirect('/Home');
 		}
 
-		if(isset($_POST['delete'])){
+		if (isset($_POST['delete'])) {
 			$this->Home_model->remove_axie_account();
 			setcookie('json_scholars', '', time() - 3600);
 			redirect('/Home');
 		}
 
-		if(isset($_POST['remove'])){
+		if (isset($_POST['remove'])) {
 			$this->Home_model->remove_scholar();
 			redirect('/Home');
+		}
+	}
+
+	public function check_time($scholar_status)
+	{	
+		$db = $this->Home_model->get_time();
+		$time_today = date_create(date('Y-m-d', time()));
+		$init_time = date_create(date('Y-m-d', 	1640995200));
+		$difference = (array)date_diff($time_today, $init_time, true);
+		if($db[0]['difference'] < $difference['d']){
+			$this->Home_model->change_time($difference['d'], $scholar_status);
 		}
 	}
 
