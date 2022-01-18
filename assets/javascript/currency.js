@@ -40,3 +40,4 @@ function fetch_currencies() {
 
 fetch_currencies();
 setInterval(fetch_currencies, 30 * (1000));
+

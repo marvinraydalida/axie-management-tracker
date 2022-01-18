@@ -21,7 +21,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     <main>
         <section class="currencies">
-            <div class="curreny widget">
+            <div class="curreny widget status-up">
                 <div style="color:#8A92B2" class="currency-name">
                     <h1>ETH</h1>
                     <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880" alt="">
@@ -31,7 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
 
-            <div style="color:#009CE8" class="curreny widget">
+            <div style="color:#009CE8" class="curreny widget status-down">
                 <div class="currency-name">
                     <h1>AXS</h1>
                     <img src="https://assets.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1604471082" alt="">
@@ -197,7 +197,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         var slp_y = <?php echo json_encode($slp_y); ?>;
         var slp_x = <?php echo json_encode($slp_x); ?>;
-        console.log();
     </script>
     <script src="<?php echo base_url() ?>assets/javascript/scriptv2.js"></script>
     <script src="<?php echo base_url() ?>assets/javascript/chart.js"></script>
