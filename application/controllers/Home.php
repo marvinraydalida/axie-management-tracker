@@ -47,7 +47,7 @@ class Home extends CI_Controller
 			$data['scholars'] = $this->get_scholars();
 		}
 
-		$this->load->view('home', $data);
+		$this->load->view('homev2', $data);
 
 		if (isset($_POST['submit'])) {
 			$this->add_scholar($this->valid_address($_POST['address']));

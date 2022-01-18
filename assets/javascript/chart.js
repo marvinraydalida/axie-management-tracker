@@ -20,7 +20,7 @@ for(let i = 0; i < ctx.length; i++){
         plugins: {
             legend: {
                 labels: {
-                    color: "#ebebeb",
+                    color: "#D4D9EB",
                     font: {
                         size: 18
                     }
@@ -30,14 +30,14 @@ for(let i = 0; i < ctx.length; i++){
         scales: {
             x: {
                 ticks: {
-                    color: "#ebebeb",
-                    maxRotation: 20,
-                    minRotation: 20
+                    color: "#D4D9EB",
+                    maxRotation: 45,
+                    minRotation: 45
                 }
             },
             y: {
                 ticks: {
-                    color: "#ebebeb"
+                    color: "#D4D9EB"
                 }
             }
         },
