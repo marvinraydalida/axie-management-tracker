@@ -21,12 +21,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <body>
 
 	<form method="POST">
-		<input type="text" name="address" placeholder="enter ronnin address">
-		<input type="submit" value="add" name='submit'>
-	</form>
-
-
-	<form method="POST">
 		<input type="hidden" name="logout" value="true">
 		<input type="submit" value="log-out">
 	</form>
