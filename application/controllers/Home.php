@@ -14,7 +14,7 @@ class Home extends CI_Controller
 		}
 		$this->load->model('Home_model');
 
-		if (isset($_COOKIE['json_scholars'])) {
+		/*if (isset($_COOKIE['json_scholars'])) {
 			print_r("henlo");
 			$data['scholars_status'] = json_decode($_COOKIE['json_scholars'], true);
 			$this->check_time($data['scholars_status']);
@@ -28,6 +28,23 @@ class Home extends CI_Controller
 			if($this->check_time($data['scholars_status'])){
 				$data['scholars'] = $this->get_scholars();
 			}
+		}*/
+
+
+		if (!isset($_SESSION['json_scholars']) || (time() - $_SESSION['time'] > 1200)) {
+			print_r("alo");
+			$scholars = $this->get_scholars();
+			$scholar_details = $this->get_scholar_details($scholars);
+			$data['scholars_status'] = $scholar_details;
+			$data['scholars'] = $scholars;
+			if ($this->check_time($data['scholars_status'])) {
+				$data['scholars'] = $this->get_scholars();
+			}
+		} else {
+			print_r("henlo");
+			$data['scholars_status'] = json_decode($_SESSION['json_scholars'], true);
+			$this->check_time($data['scholars_status']);
+			$data['scholars'] = $this->get_scholars();
 		}
 
 		$this->load->view('home', $data);
@@ -40,13 +57,14 @@ class Home extends CI_Controller
 		if (isset($_POST['logout'])) {
 			unset($_SESSION);
 			session_destroy();
-			unset($_COOKIE);
-			setcookie('json_scholars', '', time() - 3600);
+			//unset($_COOKIE);
+			//setcookie('json_scholars', '', time() - 3600);
 			redirect('/Login');
 		}
 
 		if (isset($_POST['refresh'])) {
-			setcookie('json_scholars', '', time() - 3600);
+			//setcookie('json_scholars', '', time() - 3600);
+			$_SESSION['time'] -= 1200;
 			redirect('/Home');
 		}
 
@@ -59,7 +77,8 @@ class Home extends CI_Controller
 
 		if (isset($_POST['delete'])) {
 			$this->Home_model->remove_axie_account();
-			setcookie('json_scholars', '', time() - 3600);
+			//setcookie('json_scholars', '', time() - 3600);
+			$_SESSION['time'] -= 1200;
 			redirect('/Home');
 		}
 
@@ -70,12 +89,12 @@ class Home extends CI_Controller
 	}
 
 	public function check_time($scholar_status)
-	{	
+	{
 		$db = $this->Home_model->get_time();
 		$time_today = date_create(date('Y-m-d', time()));
 		$init_time = date_create(date('Y-m-d', 	1640995200));
 		$difference = (array)date_diff($time_today, $init_time, true);
-		if($db[0]['difference'] < $difference['d']){
+		if ($db[0]['difference'] < $difference['d']) {
 			$this->Home_model->change_time($difference['d'], $scholar_status);
 			return true;
 		}
@@ -102,10 +121,16 @@ class Home extends CI_Controller
 
 		if (isset($scholar['leaderboard']['name'])) {
 			if ($this->Home_model->add_scholar($address, $_SESSION['user_id'])) {;
-				if (isset($_COOKIE['json_scholars'])) {
+				/*if (isset($_COOKIE['json_scholars'])) {
 					$scholars = json_decode($_COOKIE['json_scholars'], true);
 					array_push($scholars, $scholar);
 					setcookie('json_scholars', json_encode($scholars), time() + 1200);
+				}*/
+				if(isset($_SESSION['json_scholars'])){
+					$scholars = json_decode($_SESSION['json_scholars'], true);
+					array_push($scholars, $scholar);
+					$_SESSION['json_scholars'] = json_encode($scholars);
+					$_SESSION['time'] = time();
 				}
 			}
 		}
@@ -158,7 +183,9 @@ class Home extends CI_Controller
 		foreach ($scholars as $scholar) {
 			array_push($scholars_details, $this->request_address($scholar['ronin_address']));
 		}
-		setcookie('json_scholars', json_encode($scholars_details), time() + 1200);
+		//setcookie('json_scholars', json_encode($scholars_details), time() + 1200);
+		$_SESSION['json_scholars'] = json_encode($scholars_details);
+		$_SESSION['time'] =  time();
 		return $scholars_details;
 	}
 

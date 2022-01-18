@@ -32,6 +32,7 @@ class Login extends CI_Controller {
 			$_SESSION['email'] = $this->email;
 			$_SESSION['first_Name'] = $this->first_name;
 			$_SESSION['last_name'] = $this->last_name;
+			$_SESSION['time'] = time();
 			$this->load->view('loader');
         }
 
