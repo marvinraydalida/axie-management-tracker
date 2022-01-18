@@ -25,17 +25,14 @@ class Login extends CI_Controller {
         
         $this->form_validation->set_rules($this->config->item('login'));
         if ($this->form_validation->run() == FALSE){
-			$this->load->view('templates/header');
             $this->load->view('login');
-			$this->load->view('templates/footer');
         }
         else{
-			session_start();
 			$_SESSION['user_id'] = $this->user_id;
 			$_SESSION['email'] = $this->email;
 			$_SESSION['first_Name'] = $this->first_name;
 			$_SESSION['last_name'] = $this->last_name;
-            redirect('/Home');
+			$this->load->view('loader');
         }
 
 	}
@@ -65,6 +62,6 @@ class Login extends CI_Controller {
 				return false;
 		}	
 		else
-			return false;
+			return true;
 	}
 }

@@ -1,128 +1,187 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends CI_Controller
+{
 
 	public function index()
-	{	
+	{
 		session_start();
 		session_regenerate_id();
 
-		if(!isset($_SESSION['user_id'])){
+		if (!isset($_SESSION['user_id'])) {
 			redirect('/Login');
 		}
+		$this->load->model('Home_model');
 
-		if(isset($_COOKIE['json_scholars'])){
+		if (isset($_COOKIE['json_scholars'])) {
 			print_r("henlo");
-			$data['scholars'] = json_decode($_COOKIE['json_scholars'],true);
-		}
-		else if(!isset($_COOKIE['json_scholars'])){
+			$data['scholars_status'] = json_decode($_COOKIE['json_scholars'], true);
+			$this->check_time($data['scholars_status']);
+			$data['scholars'] = $this->get_scholars();
+		} else if (!isset($_COOKIE['json_scholars'])) {
 			print_r("alo");
 			$scholars = $this->get_scholars();
-			$data['scholars'] = $this->get_scholar_details($scholars);
+			$scholar_details = $this->get_scholar_details($scholars);
+			$data['scholars_status'] = $scholar_details;
+			$data['scholars'] = $scholars;
+			if($this->check_time($data['scholars_status'])){
+				$data['scholars'] = $this->get_scholars();
+			}
 		}
 
-		$this->load->view('templates/header');
-		$this->load->view('home',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('home', $data);
 
-		if(isset($_POST['submit'])){
+		if (isset($_POST['submit'])) {
 			$this->add_scholar($this->valid_address($_POST['address']));
 			redirect('/Home');
 		}
 
-		if(isset($_POST['logout'])){
+		if (isset($_POST['logout'])) {
+			unset($_SESSION);
 			session_destroy();
+			unset($_COOKIE);
 			setcookie('json_scholars', '', time() - 3600);
 			redirect('/Login');
 		}
+
+		if (isset($_POST['refresh'])) {
+			setcookie('json_scholars', '', time() - 3600);
+			redirect('/Home');
+		}
+
+		if (isset($_POST['update'])) {
+			$this->upload_image();
+			$this->Home_model->update_scholar();
+			print_r($_FILES);
+			redirect('/Home');
+		}
+
+		if (isset($_POST['delete'])) {
+			$this->Home_model->remove_axie_account();
+			setcookie('json_scholars', '', time() - 3600);
+			redirect('/Home');
+		}
+
+		if (isset($_POST['remove'])) {
+			$this->Home_model->remove_scholar();
+			redirect('/Home');
+		}
 	}
 
-	public function valid_address($address){
-		if(strcmp(substr($address,0,6),'ronin:') == 0)
-			$ronin_address = "0x" . substr($address,6);
+	public function check_time($scholar_status)
+	{	
+		$db = $this->Home_model->get_time();
+		$time_today = date_create(date('Y-m-d', time()));
+		$init_time = date_create(date('Y-m-d', 	1640995200));
+		$difference = (array)date_diff($time_today, $init_time, true);
+		if($db[0]['difference'] < $difference['d']){
+			$this->Home_model->change_time($difference['d'], $scholar_status);
+			return true;
+		}
+		return false;
+	}
+
+	public function valid_address($address)
+	{
+		if (strcmp(substr($address, 0, 6), 'ronin:') == 0)
+			$ronin_address = "0x" . substr($address, 6);
 		else
 			$ronin_address = $address;
 		return $ronin_address;
 	}
 
-	public function get_scholars(){
-		$this->load->model('Home_model');
+	public function get_scholars()
+	{
 		return $this->Home_model->get_scholars($_SESSION['user_id']);
 	}
 
-	public function add_scholar($address){
+	public function add_scholar($address)
+	{
 		$scholar = $this->request_address($address);
-		
-		if(isset($scholar['leaderboard']['name'])){
-			if($this->Home_model->add_scholar($address, $_SESSION['user_id'])){;
-				if(isset($_COOKIE['json_scholars'])){
-					$scholars = json_decode($_COOKIE['json_scholars'],true);
-					array_push($scholars,$scholar);
+
+		if (isset($scholar['leaderboard']['name'])) {
+			if ($this->Home_model->add_scholar($address, $_SESSION['user_id'])) {;
+				if (isset($_COOKIE['json_scholars'])) {
+					$scholars = json_decode($_COOKIE['json_scholars'], true);
+					array_push($scholars, $scholar);
 					setcookie('json_scholars', json_encode($scholars), time() + 1200);
 				}
 			}
-		}			
+		}
 	}
 
-	public function get_scholar_details($scholars){
+	public function upload_image()
+	{
+		if (isset($_FILES)) {
+			if (isset($_FILES['scholar_profile'])) {
+				switch ($_FILES['scholar_profile']['type']) {
+					case "image/jpeg":
+					case "image/svg+xml":
+					case "image/png":
+						$image_file = $_FILES['scholar_profile']['name'];
+						$file_extension = pathinfo($image_file, PATHINFO_EXTENSION);
+						$url = "http://localhost/axie-management-tracker/Home/get_image/?path=";
+						move_uploaded_file($_FILES['scholar_profile']['tmp_name'], 'uploads/scholar/' . $_POST['scholar_id'] . "." . $file_extension);
+						$_POST['image_location'] = $url . 'uploads/scholar/' . $_POST['scholar_id'] . "." . $file_extension;
+						break;
+				}
+			}
+			if (isset($_FILES['valid_id'])) {
+				switch ($_FILES['valid_id']['type']) {
+					case "image/jpeg":
+					case "image/svg+xml":
+					case "image/png":
+						$image_file = $_FILES['valid_id']['name'];
+						$file_extension = pathinfo($image_file, PATHINFO_EXTENSION);
+						$url = "http://localhost/axie-management-tracker/Home/get_image/?path=";
+						move_uploaded_file($_FILES['valid_id']['tmp_name'], 'uploads/id/' . $_POST['scholar_id'] . "." . $file_extension);
+						$_POST['valid_id'] = $url . 'uploads/id/' . $_POST['scholar_id'] . "." . $file_extension;
+						break;
+				}
+			}
+		}
+	}
+
+
+	public function get_image()
+	{
+		$this->load->helper('file');
+		$filename = $this->input->get('path');
+		header('Content-type: ' . get_mime_by_extension($filename));
+		echo file_get_contents($filename);
+	}
+
+	public function get_scholar_details($scholars)
+	{
 		$scholars_details = array();
-		foreach($scholars as $scholar){
-			array_push($scholars_details,$this->request_address($scholar['ronin_address']));
+		foreach ($scholars as $scholar) {
+			array_push($scholars_details, $this->request_address($scholar['ronin_address']));
 		}
 		setcookie('json_scholars', json_encode($scholars_details), time() + 1200);
 		return $scholars_details;
 	}
 
 
-	public function request_address($address){
-		$this->load->model('Home_model');
+	public function request_address($address)
+	{
 		$request_url = "https://axie-infinity.p.rapidapi.com/get-update/";
-		
+
 		$ronin_address = $address;
 
 		$opts = array(
-			'http'=>array(
-			  'method'=>"GET",
-			  'header'=>"x-rapidapi-host: axie-infinity.p.rapidapi.com\r\n" .
-						"x-rapidapi-key: 1c20eb7382msh33adcb36d8c9492p1011a0jsnfbf74b86df31\r\n"
+			'http' => array(
+				'method' => "GET",
+				'header' => "x-rapidapi-host: axie-infinity.p.rapidapi.com\r\n" .
+					"x-rapidapi-key: 1c20eb7382msh33adcb36d8c9492p1011a0jsnfbf74b86df31\r\n"
 			)
-		  );
+		);
 		$context = stream_context_create($opts);
 
 
 		$response_json = file_get_contents($request_url . $ronin_address, false, $context);
-		$result_array = json_decode($response_json,true);
+		$result_array = json_decode($response_json, true);
 
 		return $result_array;
 	}
-	/*public function request_address($address, $mode = 'search'){
-		$this->load->model('Home_model');
-		$request_url = "https://axie-infinity.p.rapidapi.com/get-update/";
-		$ronin_address = $address;
-		if(strcmp($mode,'search') == 0)
-			$ronin_address = "0x" . substr($address,6);
-
-		$opts = array(
-			'http'=>array(
-			  'method'=>"GET",
-			  'header'=>"x-rapidapi-host: axie-infinity.p.rapidapi.com\r\n" .
-						"x-rapidapi-key: 1c20eb7382msh33adcb36d8c9492p1011a0jsnfbf74b86df31\r\n"
-			)
-		  );
-		$context = stream_context_create($opts);
-
-
-		$response_json = file_get_contents($request_url . $ronin_address, false, $context);
-		$result_array = json_decode($response_json,true);
-		  
-		if(strcmp($mode,'search') == 0){
-			if(isset($result_array['leaderboard']['name']))
-				$this->Home_model->add_scholar($ronin_address, $_SESSION['user_id']);
-		}
-		else{
-			return $result_array;
-		}
-	}*/
-
 }

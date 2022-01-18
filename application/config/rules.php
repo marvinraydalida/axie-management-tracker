@@ -1,11 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $config = array(
     'signup' => array(
         array(
             'field' => 'email',
             'label' => 'Email',
-            'rules' => 'required|valid_email',
+            'rules' => 'required|valid_email|callback_is_registered',
+            'errors' => array(
+                'is_registered' => 'The email is already registered.'
+            )
         ),
         array(
             'field' => 'first_name',
@@ -28,8 +31,7 @@ $config = array(
             'label' => 'Password',
             'rules' => 'required|callback_validate_password',
             'errors' => array(
-                'validate_password' => 'Password should be at least 8 characters in length 
-                and should include at least one upper case letter, one number, and one special character.'
+                'validate_password' => 'Password must contain at least 8 charactes, including UPPER/lower case, number and special characters.'
             )
         ),
         array(
@@ -44,13 +46,13 @@ $config = array(
             'label' => 'Email',
             'rules' => 'required|callback_registered_email',
             'errors' => array(
-                'registered_email' => 'Wrong Email or not registered.'
+                'registered_email' => 'Wrong Credentials or not registered.'
             )
         ),
         array(
             'field' => 'password',
             'label' => 'Password',
-            'rules' => 'required|callback_check_password',
+            'rules' => 'callback_check_password',
             'errors' => array(
                 'check_password' => 'Wrong password.'
             )
@@ -58,6 +60,3 @@ $config = array(
     )
 
 );
-
-
-

@@ -1,0 +1,137 @@
+body {
+    background-color: #232735;
+}
+
+.form-container{
+    width: 500px;
+    height: 570px;
+    background-color: white;
+    margin: 50px auto 0px auto;
+    background-color: #2f364e;
+    box-sizing: border-box;
+    padding-top: 60px;
+}
+
+.register-input{
+    width: 80%;
+    margin: auto;
+}
+
+.register-input input{
+    display: block;
+    margin-bottom: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #21283b;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    border: none;
+    color: white;
+}
+
+.name{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+
+.name span{
+    position: absolute;
+    position: absolute;
+    top:0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.856);
+    padding: 15px;
+    color: white;
+    transform: translateX(105%);
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+}
+
+.name:hover span{
+    opacity: 1;
+}
+
+.name input{
+    display: inline-block;
+    width: 45%;
+}
+
+.register-button{
+    width: 80%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+.register-button{
+    width: 80%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+.register-button input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    background-color: #1cb33f;
+    font-size: 20px;
+    color: rgb(241, 233, 233);
+    border-radius: 10px;
+    transition: background-color 250ms ease-in-out;
+}
+
+.register-button input:hover{
+    background-color: #169133;
+}
+
+.error{
+    width: 20%;
+    height: 150px;
+    background-color: rgba(248, 29, 95, 0.5);
+    text-align: center;
+    border: 2px rgb(184, 15, 15) solid;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e7d3d3;
+    font-size: .8rem;
+    padding: 0px 10px;
+}
+
+.error-border{
+    box-sizing: border-box;
+    border: 1px rgb(255, 71, 71) solid !important;
+}
+
+.input-container{
+    position: relative;
+}
+
+.input-container span{
+    position: absolute;
+    top:0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.856);
+    padding: 15px;
+    color: white;
+    transform: translateX(105%);
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+}
+
+.input-container:hover > span{
+    opacity: 1;
+}
+
+span{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: .8rem;
+}

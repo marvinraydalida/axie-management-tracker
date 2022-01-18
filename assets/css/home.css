@@ -1,0 +1,594 @@
+:root {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    --font-family: 'Nunito', sans-serif;
+    ;
+}
+
+body {
+    background-color: #232735;
+}
+
+.currencies {
+    width: 90vw;
+    height: 100px;
+    margin: 0px auto 50px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.currency {
+    width: 30%;
+    height: 100%;
+    background-color: tomato;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.eth {
+    background: rgb(23, 98, 204);
+    background: linear-gradient(32deg, rgba(23, 98, 204, 1) 0%, rgba(25, 221, 227, 1) 100%);
+}
+
+.axs {
+    background: rgb(217,108,33);
+background: linear-gradient(32deg, rgba(217,108,33,1) 0%, rgba(255,194,152,1) 100%);
+}
+
+.slp {
+    background: rgb(224,30,140);
+background: linear-gradient(32deg, rgba(224,30,140,1) 0%, rgba(255,183,224,1) 100%);
+}
+
+.currency h1 {
+    font-size: 50px;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(241, 235, 235);
+    position: absolute;
+    margin: 0;
+    top: 20px;
+    left: 30px;
+}
+
+
+.currency p {
+    position: absolute;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    top: 9px;
+    right: 30px;
+}
+
+.currency i {
+    position: absolute;
+    font-size: 20px;
+    top: 40px;
+    left: 140px;
+    color: rgb(241, 235, 235);
+}
+
+.green{
+    color: #0af10a !important;
+}
+
+.red{
+    color: rgb(196, 42, 42) !important;
+}
+
+
+.add-scholar{
+    width: 90vw;
+    height: 50px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 30px;
+}
+
+.add-scholar form{
+    margin: 0px;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.add-scholar input{
+    border: none;
+    height: 100%;  
+}
+
+.add-scholar input[type='text']{
+    background-color: white;
+    width: 78%;
+    padding-left: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.add-scholar input[type='submit']{
+    background-color: rgb(11, 90, 207);
+    width: 20%;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+}
+
+.add-scholar input[type='submit']:hover{
+    background-color: rgb(12, 79, 180);
+}
+
+.my-scholars {
+    width: 90vw;
+    margin: 0px auto;
+}
+
+.heading {
+    width: 100%;
+    height: 70px;
+    background-color: #2f364e;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    border-radius: 10px 10px 0px 0px;
+}
+
+.heading-col {
+    width: 100%;
+    display: table;
+}
+
+.heading-col h1 {
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 90%;
+    color: rgb(235, 235, 235);
+    display: table-cell;
+    vertical-align: middle
+}
+
+.row {
+    width: 100%;
+    height: 70px;
+    background-color: #3e4666;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    position: relative;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+}
+
+.row:hover {
+    background-color: #485380;
+}
+
+.row-col {
+    width: 100%;
+    display: table;
+    border-bottom: 1px rgb(43, 43, 80) solid;
+}
+
+.row-1 {
+    box-sizing: border-box;
+    word-wrap: break-word;
+    padding: 0px 25px;
+}
+
+.row-col h1 {
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 90%;
+    color: #ebebeb;
+    display: table-cell;
+    vertical-align: middle
+}
+
+
+.dropdown-container {
+    position: absolute;
+    right: 0;
+    top: 35%;
+    transform: translateX(-15px);
+}
+
+.dropdown-container i {
+    font-size: 1.2rem;
+    color: yellowgreen;
+    transition: transform 250ms ease-in-out;
+    display: block;
+}
+
+.clicked .dropdown-container i {
+    transform: rotate(0.5turn);
+}
+
+.row-hidden {
+    width: 100%;
+    height: 0;
+    background-color: #343849;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+.scholar-information {
+    width: 90%;
+    height: 350px;
+    margin: auto;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.border {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border: 3px #42475c solid;
+    border-radius: 50%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #343849;
+}
+
+.image-container {
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.details {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    padding-left: 5rem;
+    padding-right: .5rem;
+    box-sizing: border-box;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.details h1 {
+    margin-top: 0px;
+    margin-bottom: 2rem;
+    color: #cacaca;
+    line-height: 5px;
+    font-size: 2rem;
+}
+
+p {
+    color: #2eca5a;
+    font-weight: bold;
+}
+
+.details img {
+    width: 50%;
+}
+
+.details::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.details::-webkit-scrollbar-thumb {
+    background: #42475c;
+    border-radius: 10px;
+}
+
+.details::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.actions-container {
+    position: absolute;
+    right: 5%;
+}
+
+.actions-container button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: transform 250ms ease-in-out;
+}
+
+.actions-container button:hover {
+    transform: scale(1.1);
+}
+
+.actions-container button[name='edit'] {
+    background-color: #227FE1;
+}
+
+.actions-container button[name='delete'] {
+    background-color: #D13B3B;
+}
+
+.actions-container button i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.graphs-container {
+    width: 90%;
+    height: 450px;
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.line-graph-container {
+    width: 48%;
+}
+
+.modal {
+    background-color: rgb(0, 0, 0, 0.5);
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.edit-modal {
+    background-color: #41486d;
+    width: 500px;
+    height: 570px;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    padding-top: 20px;
+}
+
+.edit-modal form {
+    width: 100%;
+}
+
+.inputs {
+    width: 80%;
+    margin: 0px auto;
+}
+
+.inputs>* {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5px 0px 5px 20px;
+    resize: none;
+    height: 50px;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-weight: bold;
+    background-color: #c0c7da;
+    border: none;
+}
+
+.share-quota{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between  ;
+    padding: 0;   
+    background-color: #41486d;
+}
+
+.share-quota input{
+    height: 100%;
+    width: 47%;
+    padding: 5px 0px 5px 20px;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-weight: bold;
+    background-color: #c0c7da;
+    border: none;
+}
+
+textarea {
+    padding-top: 10px !important;
+    height: 80px !important;
+}
+
+.input-image {
+    width: 80%;
+    height: 50px;
+    margin: 0px auto 40px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.input-image div {
+    border-radius: 8px;
+}
+
+.input-image input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+}
+
+#scholar_profile {
+    background-color: #f3a920;
+    position: relative;
+    width: 45%;
+    transition: background-color 250ms ease-in-out;
+}
+
+#scholar_profile:hover {
+    background-color: #c4881a;
+}
+
+#scholar_profile:hover i {
+    color: #a06904 !important;
+}
+
+
+#scholar_profile p {
+    color: white !important;
+}
+
+#scholar_profile i {
+    color: #c98301 !important;
+    transition: color 250ms ease-in-out;
+}
+
+#valid_id {
+    background-color: #2083f3;
+    position: relative;
+    width: 45%;
+    transition: background-color 250ms ease-in-out;
+}
+
+
+#valid_id p {
+    color: white !important;
+}
+
+#valid_id i {
+    color: #015ac0 !important;
+    transition: color 250ms ease-in-out;
+}
+
+#valid_id:hover {
+    background-color: #1a64b9;
+}
+
+#valid_id:hover i {
+    color: #02448f !important;
+}
+
+.update-button {
+    width: 80%;
+    height: 60px;
+    margin: auto;
+}
+
+.update-button input {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #1cb33f;
+    color: rgb(241, 233, 233);
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 250ms ease-in-out;
+}
+
+.update-button input:hover {
+    background-color: #169133;
+}
+
+#close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: var(--font-family);
+    background-color: transparent;
+    border: none;
+    color: rgb(207, 41, 12);
+    cursor: pointer;
+}
+
+
+.delete-modal{
+    background-color: #41486d;
+    width: 500px;
+    height: 300px;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    color: white;
+}
+
+.delete-action{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.delete-action input{
+    padding: 10px;
+    width: 150px;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: var(--font-family);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+}
+
+.delete-action input[name='delete']{
+    background-color: rgb(201, 37, 37);
+    font-size: 1.2rem;
+}
+
+.delete-action input[name='delete']:hover{
+    background-color: rgb(167, 13, 13);
+}
+
+.delete-action input[name='remove']{
+    background-color: #d8910c;
+}
+
+.delete-action input[name='remove']:hover{
+    background-color: #bd7b02;
+}
+
+#cancel{
+    position: absolute;
+    background-color: #41486d;
+    color: red;
+    top:0;
+    right: 0;
+    padding: 15px;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#cancel:hover{
+    color: rgb(177, 3, 3);
+}
