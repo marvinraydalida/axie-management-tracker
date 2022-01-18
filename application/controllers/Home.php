@@ -23,9 +23,11 @@ class Home extends CI_Controller
 			print_r("alo");
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
-			$data['scholars'] = $scholars;
 			$data['scholars_status'] = $scholar_details;
-			$this->check_time($data['scholars_status']);
+			$data['scholars'] = $scholars;
+			if($this->check_time($data['scholars_status'])){
+				$data['scholars'] = $this->get_scholars();
+			}
 		}
 
 		$this->load->view('home', $data);
@@ -75,7 +77,9 @@ class Home extends CI_Controller
 		$difference = (array)date_diff($time_today, $init_time, true);
 		if($db[0]['difference'] < $difference['d']){
 			$this->Home_model->change_time($difference['d'], $scholar_status);
+			return true;
 		}
+		return false;
 	}
 
 	public function valid_address($address)
