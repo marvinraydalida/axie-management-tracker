@@ -28,8 +28,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <input type="submit" value="refresh-test">
     </form>
     <main>
+
         <section class="currencies">
-            <div class="curreny widget" id="eth-class">
+            <div class="earnings widget">
+                <h1>EARNINGS</h1>
+                <h1 id="earnings"></h1>
+            </div>
+            <div class="currency widget" id="eth-class">
                 <div style="color:#8A92B2" class="currency-name">
                     <h1>ETH</h1>
                     <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880" alt="">
@@ -39,7 +44,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
 
-            <div style="color:#009CE8" class="curreny widget" id="axs-class">
+            <div style="color:#009CE8" class="currency widget" id="axs-class">
                 <div class="currency-name">
                     <h1>AXS</h1>
                     <img src="https://assets.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1604471082" alt="">
@@ -49,7 +54,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
 
-            <div style="color:#FFAFBC" class="curreny widget" id="slp-class">
+            <div style="color:#FFAFBC" class="currency widget" id="slp-class">
                 <div class="currency-name">
                     <h1>SLP</h1>
                     <img src="https://assets.coingecko.com/coins/images/10366/large/SLP.png?1578640057" alt="">
@@ -61,8 +66,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </section>
 
         <section class="information">
-            <div class="top-scholar widget">
-                <!-- TOP SCHOLARS -->
+            <div class="left-grid-space">
+                <div class="completed-quota widget">
+                    <h1>Completed Quota</h1>
+                    <h1 id="completed">7<span>/ 15</span></h1>
+                </div>
+                <div class="top-scholar-container widget">
+                    <h1>Top earners</h1>
+                    <div class="top-scholar">
+                        <div class="top-scholar-image">
+                            <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_624206636_200013332000928034_376810.jpg" alt="">
+                        </div>
+                        <h2>Marvin Ray Dalida</h2>
+                    </div>
+                </div>
             </div>
             <div class="table-container widget">
                 <div class="heading-row">
@@ -83,6 +100,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                     <div class="heading-col">
                         <h1>Next Claim</h1>
+                    </div>
+                    <div class="heading-col">
+                        <h1>Scholar</h1>
                     </div>
                 </div>
 
@@ -139,6 +159,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </span>
                                     </h1>
                                 </div>
+                                <div class="row-col">
+                                    <h1><span><?php echo round(abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']) * ($scholars[$index - 1]['share'] / 100)); ?></span>
+                                        <br>
+                                        <span style="font-size: .6rem;" class="share"><?php echo $scholars[$index - 1]['share'] ?>% share</span></i>
+                                    </h1>
+                                </div>
                             </div>
 
                             <div class="row-hidden">
@@ -161,7 +187,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <h1 class="email"><?php echo $scholars[$index - 1]['email'] ?></h1>
                                         <p>Contact</p>
                                         <h1 class="contact"><?php echo $scholars[$index - 1]['contact'] ?></h1>
-                                        <p>Address</p>
+                                        <p style="margin-bottom: 0px">Address</p>
                                         <p class="address"><?php echo $scholars[$index - 1]['address'] ?></p>
                                     </div>
                                 </div>
@@ -228,13 +254,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="delete-modal">
                 <button id="close-delete">X</button>
                 <form method="POST">
-                <input type="hidden" name="scholar_id" value="" id="delete_id">
-                <h1>Are you sure?</h1>
-                <p>Do you really want to delete this record? <br> this process cannot be undone.</p>
-                <div class="delete-actions">
-                    <input type="submit" name="delete" value="Confirm">
-                    <input type="submit" name="remove" value="Just remove Scholar">
-                </div>
+                    <input type="hidden" name="scholar_id" value="" id="delete_id">
+                    <h1>Are you sure?</h1>
+                    <p>Do you really want to delete this record? <br> this process cannot be undone.</p>
+                    <div class="delete-actions">
+                        <input type="submit" name="delete" value="Confirm">
+                        <input type="submit" name="remove" value="Just remove Scholar">
+                    </div>
                 </form>
             </div>
 
@@ -246,6 +272,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         $slp_y = array();
         $slp_x = array();
         $tmp = array();
+        $total_slp = 0;
 
         for ($i = 0; $i < $index - 1; $i++) {
             $lst = json_decode($scholars[$i]['slp_chart'], true);
@@ -264,10 +291,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
             array_push($slp_x, $tmp);
             $tmp = array();
         }
+        $index = 0;
+        foreach ($scholars_status as $scholar) {
+            $total_slp +=  round(abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']) * ((100 - $scholars[$index]['share']) / 100));
+            $index++;
+        }
         ?>
 
         var slp_y = <?php echo json_encode($slp_y); ?>;
         var slp_x = <?php echo json_encode($slp_x); ?>;
+        var totalSlp = <?php echo $total_slp; ?>;
+        console.log(totalSlp);
     </script>
     <script src="<?php echo base_url() ?>assets/javascript/scriptv2.js"></script>
     <script src="<?php echo base_url() ?>assets/javascript/chart.js"></script>
