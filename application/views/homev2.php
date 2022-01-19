@@ -184,7 +184,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="left-input">
                         <h1>Edit Scholar</h1>
                         <div class="img-container">
-                            <img src="" alt="" id = "image">
+                            <img src="" alt="" id="image">
                             <div class="select-picture">
                                 <i class="bi bi-camera"></i>
                                 <input type="file" name="scholar_profile" accept="image/*" id="image-picker">
@@ -222,6 +222,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                         <input type="submit" name="update" value="UPDATE" class="update">
                     </div>
+                </form>
+            </div>
+
+            <div class="delete-modal">
+                <button id="close-delete">X</button>
+                <form method="POST">
+                <input type="hidden" name="scholar_id" value="" id="delete_id">
+                <h1>Are you sure?</h1>
+                <p>Do you really want to delete this record? <br> this process cannot be undone.</p>
+                <div class="delete-actions">
+                    <input type="submit" name="delete" value="Confirm">
+                    <input type="submit" name="remove" value="Just remove Scholar">
+                </div>
                 </form>
             </div>
 

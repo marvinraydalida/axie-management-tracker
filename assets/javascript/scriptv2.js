@@ -3,7 +3,7 @@ const hiddenRows = document.getElementsByClassName('row-hidden');
 const settingsBtns = document.getElementsByClassName('settings-button');
 const actionBtns = document.getElementsByClassName('actions');
 const editBtns = document.getElementsByClassName('edit');
-// const deleteBtns = document.getElementsByClassName('delete');
+const deleteBtns = document.getElementsByClassName('delete');
 const hiddenInputs = document.getElementsByClassName('hidden-input');
 
 const image_class = document.getElementsByClassName('image');
@@ -22,7 +22,7 @@ const contact_id = document.getElementById('contact');
 // const share_id = document.getElementById('share');
 // const quota_id = document.getElementById('quota');
 const address_id = document.getElementById('address');
-// const delete_id = document.getElementById('delete_id');
+const delete_id = document.getElementById('delete_id');
 
 for (let i = 0; i < rows.length; i++) {
 	console.log('testin:' + i);
@@ -64,16 +64,24 @@ for (let i = 0; i < rows.length; i++) {
 		//console.log(scholar_id.getAttribute('value'));
 	});
 
-	// deleteBtns[i].addEventListener('click',function(){
-	// 	document.querySelector(".modal").style.display = "flex";
-	// 	document.querySelector(".delete-modal").style.display = "flex";
-	// 	delete_id.setAttribute('value',hiddenInputs[i].getAttribute('value'));
-	// });
+	deleteBtns[i].addEventListener('click',function(){
+		document.querySelector(".modal").style.display = "flex";
+		document.querySelector(".delete-modal").style.display = "flex";
+		actionBtns[i].style.transform = "scale(0)";
+		settingsBtns[i].classList.toggle('enabled')
+		delete_id.setAttribute('value',hiddenInputs[i].getAttribute('value'));
+		console.log(delete_id.getAttribute('value'));
+	});
 }
 
 document.getElementById('close-edit').addEventListener('click',function(){
 	document.querySelector('.modal').style.display = "none";
 	document.querySelector('.edit-modal').style.display = "none";	
+});
+
+document.getElementById('close-delete').addEventListener('click',function(){
+	document.querySelector('.modal').style.display = "none";
+	document.querySelector('.delete-modal').style.display = "none";	
 });
 
 // document.getElementById('close').addEventListener('click', function(){
