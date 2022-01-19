@@ -2,27 +2,30 @@ const rows = document.getElementsByClassName('row-visible');
 const hiddenRows = document.getElementsByClassName('row-hidden');
 const settingsBtns = document.getElementsByClassName('settings-button');
 const actionBtns = document.getElementsByClassName('actions');
-// const editBtns = document.getElementsByClassName('edit');
+const editBtns = document.getElementsByClassName('edit');
 // const deleteBtns = document.getElementsByClassName('delete');
-// const hiddenInputs = document.getElementsByClassName('hidden-input');
+const hiddenInputs = document.getElementsByClassName('hidden-input');
 
-// const name_class = document.getElementsByClassName('name');
-// const email_class = document.getElementsByClassName('email');
-// const contact_class = document.getElementsByClassName('contact');
+const image_class = document.getElementsByClassName('image');
+const name_class = document.getElementsByClassName('name');
+const email_class = document.getElementsByClassName('email');
+const contact_class = document.getElementsByClassName('contact');
 // const share_class = document.getElementsByClassName('share');
 // const quota_class = document.getElementsByClassName('quota');
-// const address_class = document.getElementsByClassName('address');
+const address_class = document.getElementsByClassName('address');
 
-// const scholar_id = document.getElementById('scholar_id');
-// const name_id = document.getElementById('name');
-// const email_id = document.getElementById('email');
-// const contact_id = document.getElementById('contact');
+const scholar_id = document.getElementById('scholar_id');
+const image_id = document.getElementById('image');
+const name_id = document.getElementById('name');
+const email_id = document.getElementById('email');
+const contact_id = document.getElementById('contact');
 // const share_id = document.getElementById('share');
 // const quota_id = document.getElementById('quota');
-// const address_id = document.getElementById('address');
+const address_id = document.getElementById('address');
 // const delete_id = document.getElementById('delete_id');
 
 for (let i = 0; i < rows.length; i++) {
+	console.log('testin:' + i);
 	rows[i].addEventListener('click', function () {
 		if (rows[i].classList.toggle("clicked")) {
 			hiddenRows[i].style.height = "auto";
@@ -43,20 +46,23 @@ for (let i = 0; i < rows.length; i++) {
 			actionBtns[i].style.transform = "scale(0)";
 		}
 	});
-	// editBtns[i].addEventListener('click', function () {
-	// 	document.querySelector(".modal").style.display = "flex";
-	// 	document.querySelector(".edit-modal").style.display = "flex";
-	// 	scholar_id.setAttribute('value',hiddenInputs[i].getAttribute('value'));
+	editBtns[i].addEventListener('click', function () {
+		document.querySelector(".modal").style.display = "flex";
+		document.querySelector(".edit-modal").style.display = "flex";
+		actionBtns[i].style.transform = "scale(0)";
+		settingsBtns[i].classList.toggle('enabled')
+		scholar_id.setAttribute('value',hiddenInputs[i].getAttribute('value'));
 
-	// 	name_id.setAttribute('value', name_class[i].innerHTML);
-	// 	email_id.setAttribute('value', email_class[i].innerHTML);
-	// 	contact_id.setAttribute('value', contact_class[i].innerHTML);
-	// 	share_id.setAttribute('value', share_class[i].innerHTML.replace('% share',''));
-	// 	quota_id.setAttribute('value', quota_class[i].innerHTML.replace(' Daily quota',''));
+		image_id.setAttribute('src', image_class[i].getAttribute('src'));
+		name_id.setAttribute('value', name_class[i].innerHTML);
+		email_id.setAttribute('value', email_class[i].innerHTML);
+		contact_id.setAttribute('value', contact_class[i].innerHTML);
+		// share_id.setAttribute('value', share_class[i].innerHTML.replace('% share',''));
+		// quota_id.setAttribute('value', quota_class[i].innerHTML.replace(' Daily quota',''));
 
-	// 	address_id.innerHTML = address_class[i].innerHTML;
-	// 	console.log(scholar_id.getAttribute('value'));
-	// });
+		address_id.innerHTML = address_class[i].innerHTML;
+		//console.log(scholar_id.getAttribute('value'));
+	});
 
 	// deleteBtns[i].addEventListener('click',function(){
 	// 	document.querySelector(".modal").style.display = "flex";
@@ -64,6 +70,11 @@ for (let i = 0; i < rows.length; i++) {
 	// 	delete_id.setAttribute('value',hiddenInputs[i].getAttribute('value'));
 	// });
 }
+
+document.getElementById('close-edit').addEventListener('click',function(){
+	document.querySelector('.modal').style.display = "none";
+	document.querySelector('.edit-modal').style.display = "none";	
+});
 
 // document.getElementById('close').addEventListener('click', function(){
 // 	document.querySelector('.modal').style.display = "none";

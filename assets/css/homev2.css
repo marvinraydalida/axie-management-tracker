@@ -302,11 +302,11 @@ body {
     background-color: #34475e;
 }
 
-#edit i{
+.edit i{
     color: rgb(29, 107, 180);
 }
 
-#delete i{
+.delete i{
     color: rgb(134, 51, 51);
 }
 
@@ -322,4 +322,215 @@ body {
 .chart-container{
     padding: 20px;
     box-sizing: border-box;
+}
+
+.modal{
+    background-color: hsla(0, 0%, 0%, 0.80);
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.edit-modal{
+    width: 700px;
+    height: 630;
+    background-color: var(--widget-color);
+    border-radius: 10px;
+    display: none;
+    flex-direction: row;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.edit-modal form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+#close-edit{
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    font-family: var(--font-family);
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    color: rgb(197, 34, 34);
+    background: none;
+}
+
+.edit-modal .left-input{
+    width: 50%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.left-input h1{
+    margin: 0px;
+    font-family: var(--font-family);
+    font-size: 36px;
+    color: var(--light-color);
+}
+
+.img-container{
+    width: 200px;
+    height: 200px;
+    border-radius:5px;
+    margin: 10px auto 35px auto;
+    position: relative;
+}
+
+.img-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius:5px;
+}
+
+.select-picture{
+    width: 50px;
+    height: 50px;
+    background-color: #4A8F31;
+    border-radius: 50%;
+    position: absolute;
+    overflow: hidden;
+    bottom: -20px;
+    right: -20px;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+}
+
+
+.select-picture:hover{
+    background-color: #3e7929;
+}
+
+.select-picture:active{
+    background-color: #325f21;
+}
+
+.select-picture input{
+    height: 100%;
+    opacity: 0;
+}
+
+.select-picture i{
+    font-size: 1.5rem;
+    color: var(--light-color);
+    position: absolute;
+    top: 11px;
+    left: 13px;
+}
+
+.edit-input{
+    width: 100%;
+    margin-bottom: 17px;
+}
+
+.edit-input h1{
+    font-size: 18px;
+    color: #737B99;
+    margin-bottom: 5px;
+}
+
+.edit-input input{
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #242E3A;
+    color: #D4D9EB;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.edit-input textarea{
+    width: 100%;
+    height: 139px;
+    padding: 15px;
+    font-family: var(--font-family);
+    background-color: #242E3A;
+    color: #D4D9EB;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+}
+
+.edit-modal .right-input{
+    width: 50%;
+    padding: 30px;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+.valid-id-btn{
+    width: 100px;
+    height: 50px;
+    margin-top: 44px;
+    border-radius: 5px;
+    background-color: #414DB0;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    display: table;
+    overflow: hidden;
+    transition: background-color 250ms ease-in-out;
+}
+
+.valid-id-btn:hover{
+    background-color: #384294;
+}
+
+.valid-id-btn:active{
+    background-color: #2d3575;
+}
+
+.valid-id-btn input{
+    height: 100px;
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.valid-id-btn p{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: var(--light-color);
+}
+
+.update{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4A8F31;
+    cursor: pointer;
+    color: var(--light-color);
+    font-size: 18px;
+    margin-top: 46px;
+    transition: background-color 250ms ease-in-out;
+}
+
+.update:hover{
+    background-color: #3e7929;
+}
+
+.update:active{
+    background-color: #325f21;
 }

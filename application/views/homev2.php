@@ -18,10 +18,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
+    <form method="POST">
+        <input type="hidden" name="logout" value="true">
+        <input type="submit" value="log-out">
+    </form>
 
+    <form method="POST">
+        <input type="hidden" name="refresh" value="true">
+        <input type="submit" value="refresh-test">
+    </form>
     <main>
         <section class="currencies">
-            <div class="curreny widget status-up">
+            <div class="curreny widget" id="eth-class">
                 <div style="color:#8A92B2" class="currency-name">
                     <h1>ETH</h1>
                     <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880" alt="">
@@ -31,7 +39,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
 
-            <div style="color:#009CE8" class="curreny widget status-down">
+            <div style="color:#009CE8" class="curreny widget" id="axs-class">
                 <div class="currency-name">
                     <h1>AXS</h1>
                     <img src="https://assets.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1604471082" alt="">
@@ -41,7 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
 
-            <div style="color:#FFAFBC" class="curreny widget">
+            <div style="color:#FFAFBC" class="curreny widget" id="slp-class">
                 <div class="currency-name">
                     <h1>SLP</h1>
                     <img src="https://assets.coingecko.com/coins/images/10366/large/SLP.png?1578640057" alt="">
@@ -137,24 +145,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="scholar-profile">
                                     <div class="profile-picture">
                                         <div class="image-border">
-                                            <img src="<?php echo $scholars[$index - 1]['image_location'] ?>" alt="">
+                                            <img class="image" src="<?php echo $scholars[$index - 1]['image_location'] ?>" alt="">
                                         </div>
                                     </div>
                                     <div class="profile-information">
                                         <button class="settings-button"><i class="bi bi-gear-fill"></i></i></button>
                                         <div class="actions">
                                             <input type="hidden" class="hidden-input" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>">
-                                            <button id="edit">Edit <i class="bi bi-pencil-square"></i></button>
-                                            <button id="delete">Delete <i class="bi bi-trash"></i></button>
+                                            <button class="edit">Edit <i class="bi bi-pencil-square"></i></button>
+                                            <button class="delete">Delete <i class="bi bi-trash"></i></button>
                                         </div>
                                         <p>Name</p>
-                                        <h1><?php echo $scholars[$index - 1]['name'] ?></h1>
+                                        <h1 class="name"><?php echo $scholars[$index - 1]['name'] ?></h1>
                                         <p>Email</p>
-                                        <h1><?php echo $scholars[$index - 1]['email'] ?></h1>
+                                        <h1 class="email"><?php echo $scholars[$index - 1]['email'] ?></h1>
                                         <p>Contact</p>
-                                        <h1><?php echo $scholars[$index - 1]['contact'] ?></h1>
+                                        <h1 class="contact"><?php echo $scholars[$index - 1]['contact'] ?></h1>
                                         <p>Address</p>
-                                        <p><?php echo $scholars[$index - 1]['address'] ?></p>
+                                        <p class="address"><?php echo $scholars[$index - 1]['address'] ?></p>
                                     </div>
                                 </div>
 
@@ -167,6 +175,56 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <?php endforeach; ?>
                 </div>
             </div>
+        </section>
+        <section class="modal">
+            <div class="edit-modal">
+                <button id="close-edit">X</button>
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="scholar_id" value="" id="scholar_id">
+                    <div class="left-input">
+                        <h1>Edit Scholar</h1>
+                        <div class="img-container">
+                            <img src="" alt="" id = "image">
+                            <div class="select-picture">
+                                <i class="bi bi-camera"></i>
+                                <input type="file" name="scholar_profile" accept="image/*" id="image-picker">
+                            </div>
+                        </div>
+                        <div class="edit-input">
+                            <h1>Name</h1>
+                            <input type="text" name="name" placeholder="Full name" autocomplete="off" value="" id="name">
+                        </div>
+                        <div class="edit-input">
+                            <h1>Email</h1>
+                            <input type="text" name="email" placeholder="email" autocomplete="off" value="" id="email">
+                        </div>
+                        <div class="edit-input">
+                            <h1>Contact</h1>
+                            <input type="text" name="contact" placeholder="Contact" autocomplete="off" value="" id="contact">
+                        </div>
+                    </div>
+                    <div class="right-input">
+                        <div class="edit-input">
+                            <h1>Daily Quota</h1>
+                            <input type="text" name="quota" placeholder="Daily quota" autocomplete="off" value="" id="quota">
+                        </div>
+                        <div class="edit-input">
+                            <h1>Share</h1>
+                            <input type="text" name="share" placeholder="Share" autocomplete="off" value="" id="share">
+                        </div>
+                        <div class="edit-input">
+                            <h1>Address</h1>
+                            <textarea name="address" placeholder="Address" value="" id="address"></textarea>
+                        </div>
+                        <div class="valid-id-btn">
+                            <p>Valid ID <i class="bi bi-person-badge-fill"></i></p>
+                            <input type="file" name="valid_id" accept="image/*">
+                        </div>
+                        <input type="submit" name="update" value="UPDATE" class="update">
+                    </div>
+                </form>
+            </div>
+
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

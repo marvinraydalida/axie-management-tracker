@@ -71,7 +71,7 @@ class Home extends CI_Controller
 		if (isset($_POST['update'])) {
 			$this->upload_image();
 			$this->Home_model->update_scholar();
-			print_r($_FILES);
+			//print_r($_FILES);
 			redirect('/Home');
 		}
 
