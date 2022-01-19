@@ -73,12 +73,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
                 <div class="top-scholar-container widget">
                     <h1>Top earners</h1>
-                    <div class="top-scholar">
-                        <div class="top-scholar-image">
-                            <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_624206636_200013332000928034_376810.jpg" alt="">
+                    <?php for ($i = 0; $i < count($scholars_status); $i++) : ?>
+                        <?php
+                            if($i == 3)
+                                break;
+                        ?>
+                        <div class="top-scholar">
+                            <div class="top-scholar-image">
+                                <img src="<?php echo $scholars[$average_asc[$i]]['image_location'] ?>" alt="">
+                            </div>
+                            <h2><?php echo $scholars[$average_asc[$i]]['name'] ?></h2>
                         </div>
-                        <h2>Marvin Ray Dalida</h2>
-                    </div>
+                    <?php endfor; ?>
                 </div>
             </div>
             <div class="table-container widget">
