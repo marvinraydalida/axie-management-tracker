@@ -69,7 +69,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="left-grid-space">
                 <div class="completed-quota widget">
                     <h1>Completed Quota</h1>
-                    <h1 id="completed">7<span>/ 15</span></h1>
+                    <h1 id="completed"></h1>
                 </div>
                 <div class="top-scholar-container widget">
                     <h1>Top earners</h1>
@@ -109,6 +109,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="rows">
                     <?php
                     $index = 1;
+                    $completed = 0;
                     foreach ($scholars_status as $scholar) : ?>
                         <div class="row-container">
                             <div class="row-visible">
@@ -119,6 +120,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <?php if ($scholar['slp']['todaySoFar'] < $scholars[$index - 1]['quota']) : ?>
                                         <h1 style="color:#D82847">
                                         <?php elseif ($scholar['slp']['todaySoFar'] >= $scholars[$index - 1]['quota']) : ?>
+                                            <?php $completed++; ?>
                                             <h1 style="color:#2DD45C">
                                             <?php endif; ?>
                                             <?php echo $scholar['slp']['todaySoFar'] ?><br>
@@ -301,6 +303,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         var slp_y = <?php echo json_encode($slp_y); ?>;
         var slp_x = <?php echo json_encode($slp_x); ?>;
         var totalSlp = <?php echo $total_slp; ?>;
+        var completed = <?php echo $completed; ?>;
         console.log(totalSlp);
     </script>
     <script src="<?php echo base_url() ?>assets/javascript/scriptv2.js"></script>

@@ -84,6 +84,15 @@ document.getElementById('close-delete').addEventListener('click',function(){
 	document.querySelector('.delete-modal').style.display = "none";	
 });
 
+const completedTag = document.getElementById('completed')
+completedTag.innerHTML = completed;
+const newSpan = document.createElement('span');
+const newSpanContent = document.createTextNode(" / " + rows.length);
+newSpan.appendChild(newSpanContent);
+completedTag.appendChild(newSpan);
+
+//[0].innerHTML = `/ ${rows.length}`;
+
 // document.getElementById('close').addEventListener('click', function(){
 // 	document.querySelector('.modal').style.display = "none";
 // 	document.querySelector('.edit-modal').style.display = "none";
