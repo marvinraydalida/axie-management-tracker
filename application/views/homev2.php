@@ -31,7 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="me-image">
                     <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_624206636_200013332000928034_376810.jpg" alt="">
                 </div>
-                <h1>Marvin Ray Dalida</h1>
+                <h1><?php echo $user['first_name'] . ' ' . $user['last_name']?></h1>
             </div>
             <div class="add-scholar-container">
                 <form method="POST">

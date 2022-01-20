@@ -40,14 +40,15 @@ class Home extends CI_Controller
 			if ($this->check_time($data['scholars_status'])) {
 				$data['scholars'] = $this->get_scholars();
 			}
-			$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		} else {
 			//print_r("henlo");
 			$data['scholars_status'] = json_decode($_SESSION['json_scholars'], true);
 			$this->check_time($data['scholars_status']);
 			$data['scholars'] = $this->get_scholars();
-			$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		}
+
+		$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
+		$data['user'] = $_SESSION;
 
 		$this->load->view('homev2', $data);
 
