@@ -13,6 +13,10 @@ class Home extends CI_Controller
 			redirect('/Login');
 		}
 		$this->load->model('Home_model');
+		$this->load->helper(array('form'));
+		$this->load->library('form_validation');
+		$this->config->load('rules');
+		$this->form_validation->set_rules($this->config->item('update_scholar'));
 
 		/*if (isset($_COOKIE['json_scholars'])) {
 			print_r("henlo");
@@ -47,10 +51,25 @@ class Home extends CI_Controller
 			$data['scholars'] = $this->get_scholars();
 		}
 
+		if(isset($_SESSION['success'])){
+			$data['update_success'] = $_SESSION['success'];
+			unset($_SESSION['success']);
+		}
+
 		$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		$data['user'] = $_SESSION;
+		
+		//$this->load->view('homev2', $data);
 
-		$this->load->view('homev2', $data);
+		if ($this->form_validation->run() == FALSE){
+            $this->load->view('homev2', $data);
+        }
+        else{
+			$_SESSION['success'] = true;
+            $this->upload_image();
+			$this->Home_model->update_scholar();
+			redirect('/Home');
+        }
 
 		if (isset($_POST['submit'])) {
 			$this->add_scholar($this->valid_address($_POST['address']));
@@ -71,12 +90,12 @@ class Home extends CI_Controller
 			redirect('/Home');
 		}
 
-		if (isset($_POST['update'])) {
-			$this->upload_image();
-			$this->Home_model->update_scholar();
-			//print_r($_FILES);
-			redirect('/Home');
-		}
+		// if (isset($_POST['update'])) {
+		// 	$this->upload_image();
+		// 	$this->Home_model->update_scholar();
+		// 	//print_r($_FILES);
+		// 	redirect('/Home');
+		// }
 
 		if (isset($_POST['delete'])) {
 			$this->Home_model->remove_axie_account();
@@ -129,7 +148,7 @@ class Home extends CI_Controller
 					array_push($scholars, $scholar);
 					setcookie('json_scholars', json_encode($scholars), time() + 1200);
 				}*/
-				if(isset($_SESSION['json_scholars'])){
+				if (isset($_SESSION['json_scholars'])) {
 					$scholars = json_decode($_SESSION['json_scholars'], true);
 					array_push($scholars, $scholar);
 					$_SESSION['json_scholars'] = json_encode($scholars);
@@ -215,19 +234,29 @@ class Home extends CI_Controller
 		return $result_array;
 	}
 
-	public function generate_top_three($scholar_status){
-        $average = array();
-        $index = array();
-        for($i = 0; $i < count($scholar_status); $i++){
-            array_push($index, $i);
-        }
+	public function generate_top_three($scholar_status)
+	{
+		$average = array();
+		$index = array();
+		for ($i = 0; $i < count($scholar_status); $i++) {
+			array_push($index, $i);
+		}
 
-        foreach($scholar_status as $status){
-            array_push($average, $status['slp']['average']);
-        }
+		foreach ($scholar_status as $status) {
+			array_push($average, $status['slp']['average']);
+		}
 
-        array_multisort($average, SORT_DESC, $index);
+		array_multisort($average, SORT_DESC, $index);
 
-        return $index;
-    }
+		return $index;
+	}
+
+	public function validate_full_name($str)
+	{
+		if (!preg_match("/^[a-zA-Z-' ]*$/", $str)) {
+			return false;
+		}
+
+		return true;
+	}
 }

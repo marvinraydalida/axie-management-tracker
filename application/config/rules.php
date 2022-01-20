@@ -57,6 +57,36 @@ $config = array(
                 'check_password' => 'Wrong password.'
             )
         ),
+    ),
+    'update_scholar' => array(
+        array(
+            'field' => 'name',
+            'label' => 'Full name',
+            'rules' => 'required|callback_validate_full_name|min_length[4]',
+            'errors' => array(
+                'validate_full_name' => 'Only letters and whitespace allowed in name.'
+            )
+        ),
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|valid_email',
+        ),
+        array(
+            'field' => 'contact',
+            'label' => 'Contact',
+            'rules' => 'required|min_length[8]|max_length[11]|is_natural',
+        ),
+        array(
+            'field' => 'quota',
+            'label' => 'Quota',
+            'rules' => 'required|is_natural',
+        ),
+        array(
+            'field' => 'share',
+            'label' => 'Share',
+            'rules' => 'required|greater_than_equal_to[0]|less_than_equal_to[100]',
+        ),
     )
 
 );

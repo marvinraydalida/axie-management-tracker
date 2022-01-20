@@ -31,7 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="me-image">
                     <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_624206636_200013332000928034_376810.jpg" alt="">
                 </div>
-                <h1><?php echo $user['first_name'] . ' ' . $user['last_name']?></h1>
+                <h1><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></h1>
             </div>
             <div class="add-scholar-container">
                 <form method="POST">
@@ -305,6 +305,47 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                 </form>
             </div>
+        </section>
+        <section class="errors">
+            <?php if (!empty(form_error('name'))) : ?>
+                <div class="error error-danger">
+                    <p><?php echo form_error('name'); ?></p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty(form_error('email'))) : ?>
+                <div class="error error-danger">
+                    <p><?php echo form_error('email'); ?></p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty(form_error('contact'))) : ?>
+                <div class="error error-danger">
+                    <p><?php echo form_error('contact'); ?></p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty(form_error('quota'))) : ?>
+                <div class="error error-danger">
+                    <p><?php echo form_error('quota'); ?></p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty(form_error('share'))) : ?>
+                <div class="error error-danger">
+                    <p><?php echo form_error('share'); ?></p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($update_success)) : ?>
+                <div class="error">
+                    <p>Update Success</p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+                <?php unset($_SESSION['success']);?>
+            <?php endif; ?>
+
 
         </section>
     </main>
