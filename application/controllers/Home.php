@@ -32,7 +32,7 @@ class Home extends CI_Controller
 
 
 		if (!isset($_SESSION['json_scholars']) || (time() - $_SESSION['time'] > 1200)) {
-			print_r("alo");
+			//print_r("alo");
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
 			$data['scholars_status'] = $scholar_details;
@@ -42,7 +42,7 @@ class Home extends CI_Controller
 			}
 			$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		} else {
-			print_r("henlo");
+			//print_r("henlo");
 			$data['scholars_status'] = json_decode($_SESSION['json_scholars'], true);
 			$this->check_time($data['scholars_status']);
 			$data['scholars'] = $this->get_scholars();

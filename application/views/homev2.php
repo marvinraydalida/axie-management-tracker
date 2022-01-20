@@ -18,17 +18,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-    <form method="POST">
-        <input type="hidden" name="logout" value="true">
-        <input type="submit" value="log-out">
-    </form>
 
-    <form method="POST">
-        <input type="hidden" name="refresh" value="true">
-        <input type="submit" value="refresh-test">
-    </form>
+    <button id="show-sidebar">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <div class="sidebar">
+        <div class="sidebar-top">
+            <button id="hide-sidebar"><i class="bi bi-arrow-left"></i></button>
+            <h1>Welcome</h1>
+            <div class="me-container">
+                <div class="me-image">
+                    <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_624206636_200013332000928034_376810.jpg" alt="">
+                </div>
+                <h1>Marvin Ray Dalida</h1>
+            </div>
+            <div class="add-scholar-container">
+                <form method="POST">
+                    <input type="text" name="address" placeholder="Enter ronnin address" autocomplete="off">
+                    <button type="submit" value="ADD" name='submit'><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+
+            <button class="button-hover button-active"><i class="bi bi-person"></i> My account</button>
+            <form method="POST">
+                <input type="hidden" name="refresh" value="true">
+                <button class="button-hover button-active" type="submit" value="refresh-test"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+            </form>
+        </div>
+        <div class="sidebar-bottom">
+            <form method="POST">
+                <input type="hidden" name="logout" value="true">
+                <button class="button-hover button-active" type="submit" value="log-out"><i class="bi bi-door-open"></i> Sign out</button>
+            </form>
+        </div>
+        <!-- <form method="POST">
+            <input type="hidden" name="refresh" value="true">
+            <input type="submit" value="refresh-test">
+        </form> -->
+        <!-- <form method="POST">
+            <input type="hidden" name="logout" value="true">
+            <input type="submit" value="log-out">
+        </form> -->
+    </div>
+
     <main>
-
         <section class="currencies">
             <div class="earnings widget">
                 <h1>EARNINGS</h1>
@@ -75,8 +109,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <h1>Top earners</h1>
                     <?php for ($i = 0; $i < count($scholars_status); $i++) : ?>
                         <?php
-                            if($i == 3)
-                                break;
+                        if ($i == 3)
+                            break;
                         ?>
                         <div class="top-scholar">
                             <div class="top-scholar-image">

@@ -84,6 +84,14 @@ document.getElementById('close-delete').addEventListener('click',function(){
 	document.querySelector('.delete-modal').style.display = "none";	
 });
 
+document.getElementById('show-sidebar').addEventListener('click',function(){
+	document.querySelector('.sidebar').style.transform = "translateX(0%)";
+});
+
+document.getElementById('hide-sidebar').addEventListener('click',function(){
+	document.querySelector('.sidebar').style.transform = "translateX(-100%)";
+});
+
 const completedTag = document.getElementById('completed')
 completedTag.innerHTML = completed;
 const newSpan = document.createElement('span');
