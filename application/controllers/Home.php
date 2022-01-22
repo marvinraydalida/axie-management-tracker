@@ -62,7 +62,7 @@ class Home extends CI_Controller
 		//$this->load->view('homev2', $data);
 
 		if ($this->form_validation->run() == FALSE){
-            $this->load->view('homev2', $data);
+            $this->load->view('home', $data);
         }
         else{
 			$_SESSION['success'] = true;
