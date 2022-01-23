@@ -87,6 +87,33 @@ $config = array(
             'label' => 'Share',
             'rules' => 'required|greater_than_equal_to[0]|less_than_equal_to[100]',
         ),
-    )
+    ),
+    'update_account' => array(
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|valid_email|callback_is_registered',
+            'errors' => array(
+                'is_registered' => 'The email is already registered.'
+            )
+        ),
+        array(
+            'field' => 'first_name',
+            'label' => 'First name',
+            'rules' => 'required|callback_validate_first_name|min_length[2]|max_length[26]',
+            'errors' => array(
+                'validate_first_name' => 'Only letters and white space allowed in first name'
+            )
+        ),
+        array(
+            'field' => 'last_name',
+            'label' => 'Last name',
+            'rules' => 'required|callback_validate_last_name|min_length[2]|max_length[26]',
+            'errors' => array(
+                'validate_last_name' => 'Only letters and white space allowed in last name'
+            )
+        )
+    ),
+
 
 );

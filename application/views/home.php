@@ -29,7 +29,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <h1>Welcome</h1>
             <div class="me-container">
                 <div class="me-image">
-                    <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_624206636_200013332000928034_376810.jpg" alt="">
+                    <img src="<?php echo $user['image']; ?>" alt="">
                 </div>
                 <h1><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></h1>
             </div>
@@ -40,7 +40,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </form>
             </div>
 
-            <button class="button-hover button-active"><i class="bi bi-person"></i> My account</button>
+            <button class="button-hover button-active"><i class="bi bi-person"></i> <a href="Account">My Account</a></button>
             <form method="POST">
                 <input type="hidden" name="refresh" value="true">
                 <button class="button-hover button-active" type="submit" value="refresh-test"><i class="bi bi-arrow-clockwise"></i> Refresh</button>

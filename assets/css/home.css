@@ -1,12 +1,12 @@
 :root {
     --widget-color: #1F2935;
-    --background-color: #15232E;
+    --background-color: #181f29;
     --font-family: 'Nunito', sans-serif;
     --light-color: #D4D9EB;
 }
 
 body {
-   background-color: #181f29;
+   background-color: var(--background-color);
 }
 
 .widget {
@@ -57,6 +57,11 @@ main{
     transform: translateY(-100px);
     padding: 130px 30px 30px 30px;
     box-sizing: border-box;
+}
+
+.sidebar a{
+    text-decoration: none;
+    color: var(--light-color);
 }
 
 .sidebar-top #hide-sidebar{

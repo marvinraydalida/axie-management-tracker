@@ -1,0 +1,235 @@
+:root {
+    --widget-color: #1F2935;
+    --background-color: #181f29;
+    --font-family: 'Nunito', sans-serif;
+    --light-color: #D4D9EB;
+    --input-color: #202E3A;
+}
+
+body {
+   background-color: var(--background-color);
+}
+
+h1{
+    font-size: 48px;
+    font-family: var(--font-family);
+    color: var(--light-color);
+    margin: 0px 0px 30px 0px;
+}
+
+h2{
+    font-size: 36px;
+    font-family: var(--font-family);
+    color: #898E9F;
+    margin: 0px 0px 20px 0px;
+}
+
+#back{
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+
+#back a{
+    font-size: 24px;
+    text-decoration: none;
+    color: var(--light-color);
+}
+
+.profile{
+    width: 50%;
+    height: 80vh;
+    /* border: 1px dashed; */
+    margin: auto;
+}
+
+.profile-container form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* border: 1px dashed white; */
+}
+
+.profile-picture{
+    width: 270px;
+    height: 270px;
+    position: relative;
+}
+
+.profile-picture img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.select-picture{
+    width: 50px;
+    height: 50px;
+    background-color: #4A8F31;
+    border-radius: 50%;
+    position: absolute;
+    overflow: hidden;
+    bottom: -20px;
+    right: -20px;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+}
+
+
+.select-picture:hover{
+    background-color: #3e7929;
+}
+
+.select-picture:active{
+    background-color: #325f21;
+}
+
+.select-picture input{
+    height: 100%;
+    opacity: 0;
+}
+
+.select-picture i{
+    font-size: 1.5rem;
+    color: var(--light-color);
+    position: absolute;
+    top: 11px;
+    left: 13px;
+}
+
+.inputs{
+    width: 45%;
+}
+
+.inputs input[type="submit"]{
+    width: 100%;
+    height: 60px;
+    border: none;
+    background-color: #239139;
+    border-radius: 5px;
+    color: var(--light-color);
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+}
+
+.inputs input[type="submit"]:hover{
+    background-color: #3e7929;
+}
+
+.inputs input[type="submit"]:active{
+    background-color: #325f21;
+}
+
+.input h1{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.input input{
+    background-color: var(--input-color);
+    font-family: var(--font-family);
+    font-size: 24px;
+    color: var(--light-color);
+    height: 60px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding-left: 20px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+
+.password{
+    width: 50%;
+    height: 80vh;
+    margin: auto;
+    margin-top: 4%;
+}
+
+
+.password-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.new-password{
+    width: 45%;
+}
+
+.old-update{
+    width: 45%;
+}
+
+.old-update input[type="submit"]{
+    width: 100%;
+    height: 60px;
+    border: none;
+    background-color: #239139;
+    margin-top: 41px;
+    border-radius: 5px;
+    color: var(--light-color);
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+}
+
+.old-update input[type="submit"]:hover{
+    background-color: #3e7929;
+}
+
+.old-update input[type="submit"]:active{
+    background-color: #325f21;
+}
+
+.errors{
+    position: fixed;
+    height: auto;
+    width: 300px;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.error{
+    height: auto;
+    width: 100%;
+    padding: 5px 5px 5px 20px;
+    margin-top: 10px;
+    font-family: var(--font-family);
+    color: white;
+    border-radius: 10px;
+    background-color: #40814A;
+    position: relative;
+    overflow: hidden;
+}
+
+.error p{
+   max-width: 70%; 
+}
+
+.error button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    font-size: 1.5rem;
+    border: none;
+    background-color: #387541;
+    color: #26502d;
+    cursor: pointer;
+}
+
+.error-danger{
+    background-color: #814040;
+}
+
+.error-danger button{
+    background-color: #743535;
+    color: #3b1b1b;
+}

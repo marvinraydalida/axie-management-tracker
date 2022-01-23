@@ -8,6 +8,7 @@ class Login extends CI_Controller {
 	private $email;
 	private $first_name;
 	private $last_name;
+	private $image;
 
 	public function index()
 	{	
@@ -32,6 +33,7 @@ class Login extends CI_Controller {
 			$_SESSION['email'] = $this->email;
 			$_SESSION['first_name'] = $this->first_name;
 			$_SESSION['last_name'] = $this->last_name;
+			$_SESSION['image'] = $this->image;
 			$_SESSION['time'] = time();
 			$this->load->view('loader');
         }
@@ -56,6 +58,7 @@ class Login extends CI_Controller {
 				$this->email = $user[0]['email'];
 				$this->first_name = $user[0]['first_name'];
 				$this->last_name = $user[0]['last_name'];
+				$this->image = $user[0]['image_location'];
 				return true;
 			}
 				
