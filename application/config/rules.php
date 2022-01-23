@@ -114,6 +114,29 @@ $config = array(
             )
         )
     ),
+    'change_password' => array(
+        array(
+            'field' => 'new_password',
+            'label' => 'New password',
+            'rules' => 'required|callback_validate_password',
+            'errors' => array(
+                'validate_password' => 'New password must contain at least 8 charactes, including UPPER/lower case, number and special characters.'
+            )
+        ),
+        array(
+            'field' => 'cnew_password',
+            'label' => 'Confirm new password',
+            'rules' => 'required|matches[new_password]'
+        ),
+        array(
+            'field' => 'old_password',
+            'label' => 'Old password',
+            'rules' => 'callback_check_password',
+            'errors' => array(
+                'check_password' => 'Wrong Old password.'
+            )
+        ),
+    ),
 
 
 );

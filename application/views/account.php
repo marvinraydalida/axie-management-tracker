@@ -26,7 +26,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                 <div class="profile-picture">
-                    <img src="<?php echo $image;?>" alt="">
+                    <img src="<?php echo $image; ?>" alt="">
                     <div class="select-picture">
                         <i class="bi bi-camera"></i>
                         <input type="file" name="user_profile" accept="image/*" id="image-picker">
@@ -53,27 +53,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     <section class="password">
         <h2>Password</h2>
-        <!-- <form method ="POST"> -->
-        <div class="password-container">
-            <div class="new-password">
-                <div class="input">
-                    <h1>New password</h1>
-                    <input type="password" name="new_password" placeholder="New password">
+        <form method="POST">
+            <div class="password-container">
+                <div class="new-password">
+                    <div class="input">
+                        <h1>New password</h1>
+                        <input type="password" name="new_password" placeholder="New password">
+                    </div>
+                    <div class="input">
+                        <h1>Confirm new password</h1>
+                        <input type="password" name="cnew_password" placeholder="Confirm new password">
+                    </div>
                 </div>
-                <div class="input">
-                    <h1>Confirm new password</h1>
-                    <input type="password" name="cnew_password" placeholder="Confirm new password">
+                <div class="old-update">
+                    <div class="input">
+                        <h1>Old password</h1>
+                        <input type="password" name="old_password" placeholder="Old password">
+                    </div>
+                    <input type="submit" name="change" value="CHANGE PASSWORD">
                 </div>
             </div>
-            <div class="old-update">
-                <div class="input">
-                    <h1>Old password</h1>
-                    <input type="password" name="old_password" placeholder="Old password">
-                </div>
-                <input type="submit" name="change" value="CHANGE PASSWORD">
-            </div>
-        </div>
-        <!-- </form> -->
+        </form>
     </section>
     <section class="errors">
         <?php if (!empty(form_error('first_name'))) : ?>
@@ -91,6 +91,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php if (!empty(form_error('last_name'))) : ?>
             <div class="error error-danger">
                 <p><?php echo form_error('last_name'); ?></p>
+                <button class="close-toast"><i class="bi bi-x"></i></button>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty(form_error('new_password'))) : ?>
+            <div class="error error-danger">
+                <p><?php echo form_error('new_password'); ?></p>
+                <button class="close-toast"><i class="bi bi-x"></i></button>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty(form_error('cnew_password'))) : ?>
+            <div class="error error-danger">
+                <p><?php echo form_error('cnew_password'); ?></p>
+                <button class="close-toast"><i class="bi bi-x"></i></button>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty(form_error('old_password'))) : ?>
+            <div class="error error-danger">
+                <p><?php echo form_error('old_password'); ?></p>
                 <button class="close-toast"><i class="bi bi-x"></i></button>
             </div>
         <?php endif; ?>
