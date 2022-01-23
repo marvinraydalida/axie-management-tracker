@@ -67,5 +67,9 @@ class Login extends CI_Controller {
 		}	
 		else
 			return true;
+			//set to true because error result will overflow e.g. "Wrong password" atop "Wrong Credentials or not registered."
+			//Another example: sample@email.com is a non-existent account (NEA). Since it's non-existing the count($user) > 0 condition
+			//will yield false which will then display "Wrong password" which is a wrong error message if you user entered NEA.
+			//If parent if else statement is removed, error will occur if user entered a non-existent email account.
 	}
 }
