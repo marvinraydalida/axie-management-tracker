@@ -31,12 +31,7 @@ class Home extends CI_Controller
 			$this->check_time($data['scholars_status']);
 			$data['scholars'] = $this->get_scholars();
 		}
-
-		if (isset($_SESSION['success'])) {
-			$data['update_success'] = $_SESSION['success'];
-			unset($_SESSION['success']);
-		}
-
+		
 		$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		$data['user'] = $_SESSION;
 

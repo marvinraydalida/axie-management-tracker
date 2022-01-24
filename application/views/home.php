@@ -89,7 +89,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <img src="https://assets.coingecko.com/coins/images/10366/large/SLP.png?1578640057" alt="">
                 </div>
                 <div class="currency-value">
-                    <h1 id="slp">123,123</h1>
+                    <h1 id="slp"></h1>
                 </div>
             </div>
         </section>
@@ -337,8 +337,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             <?php endif; ?>
 
-            <?php if (isset($update_success)) : ?>
-                <?php if ($update_success) : ?>
+            <?php if (isset($_SESSION['success'])) : ?>
+                <?php if ($_SESSION['success']) : ?>
                     <div class="error">
                         <p>Update Success</p>
                         <button class="close-toast"><i class="bi bi-x"></i></button>
