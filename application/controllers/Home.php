@@ -48,7 +48,7 @@ class Home extends CI_Controller
 			if ($affected_rows > 0)
 				$_SESSION['success'] = true;
 			else
-			$_SESSION['success'] = false;
+				$_SESSION['success'] = false;
 			redirect('/Home');
 		}
 
@@ -107,6 +107,7 @@ class Home extends CI_Controller
 		return $this->Home_model->get_scholars($_SESSION['user_id']);
 	}
 
+
 	public function add_scholar($address)
 	{
 		$scholar = $this->request_address($address);
@@ -122,6 +123,21 @@ class Home extends CI_Controller
 			}
 		}
 	}
+	// public function add_scholar($address)
+	// {
+	// 	$scholar = $this->request_address($address);
+
+	// 	if (isset($scholar['leaderboard']['name'])) {
+	// 		if ($this->Home_model->add_scholar($address, $_SESSION['user_id'])) {;
+	// 			if (isset($_SESSION['json_scholars'])) {
+	// 				$scholars = json_decode($_SESSION['json_scholars'], true);
+	// 				array_push($scholars, $scholar);
+	// 				$_SESSION['json_scholars'] = json_encode($scholars);
+	// 				$_SESSION['time'] = time();
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	public function upload_image()
 	{

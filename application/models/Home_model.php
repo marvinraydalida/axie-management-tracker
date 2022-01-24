@@ -45,7 +45,7 @@ class Home_model extends CI_Model
             'manager_id' => $manager_id,
             'ronin_address' => $ronin_address
         );
-        $this->db->where($data);
+        $this->db->where('ronin_address', $ronin_address);
         $query = $this->db->get($this->db_table);
         if (count($query->result_array()) == 0) {
             $slp_chart = array(0, 1, 2, 3, 4, 5, 6);
@@ -62,6 +62,30 @@ class Home_model extends CI_Model
         }
         return false;
     } //1640995200)
+
+    // public function add_scholar($ronin_address, $manager_id)
+    // {
+    //     $data = array(
+    //         'manager_id' => $manager_id,
+    //         'ronin_address' => $ronin_address
+    //     );
+    //     $this->db->where($data);
+    //     $query = $this->db->get($this->db_table);
+    //     if (count($query->result_array()) == 0) {
+    //         $slp_chart = array(0, 1, 2, 3, 4, 5, 6);
+    //         $init_value = array(
+    //             'slp' => 0, 
+    //             'time' => 1640995200
+    //         );
+    //         $slp_chart = array_fill_keys($slp_chart, $init_value);
+    //         $data['slp_chart'] = json_encode($slp_chart);
+
+    //         $this->db->insert($this->db_table, $data);
+    //         print_r("inserted");
+    //         return true;
+    //     }
+    //     return false;
+    // } //1640995200)
 
     public function update_scholar()
     {
