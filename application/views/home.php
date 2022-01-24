@@ -51,8 +51,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="sidebar-bottom">
             <?php echo form_open('Home'); ?>
             <!-- <form method="POST"> -->
-                <input type="hidden" name="logout" value="true">
-                <button class="button-hover button-active" type="submit" value="log-out"><i class="bi bi-door-open"></i> Sign out</button>
+            <input type="hidden" name="logout" value="true">
+            <button class="button-hover button-active" type="submit" value="log-out"><i class="bi bi-door-open"></i> Sign out</button>
             </form>
         </div>
     </div>
@@ -338,10 +338,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <?php endif; ?>
 
             <?php if (isset($update_success)) : ?>
-                <div class="error">
-                    <p>Update Success</p>
-                    <button class="close-toast"><i class="bi bi-x"></i></button>
-                </div>
+                <?php if ($update_success) : ?>
+                    <div class="error">
+                        <p>Update Success</p>
+                        <button class="close-toast"><i class="bi bi-x"></i></button>
+                    </div>
+                <?php else : ?>
+                    <div class="error error-warning">
+                        <p>No changes were made</p>
+                        <button class="close-toast"><i class="bi bi-x"></i></button>
+                    </div>
+                <?php endif; ?>
+
                 <?php unset($_SESSION['success']); ?>
             <?php endif; ?>
 

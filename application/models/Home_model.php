@@ -73,6 +73,7 @@ class Home_model extends CI_Model
         //xss filter enabled
         $data = $this->security->xss_clean($this->input->post());
         $this->db->update($this->db_table, $data);
+        return $this->db->affected_rows();
 
         //xss filter disabled
         // $this->db->update($this->db_table, $this->input->post());

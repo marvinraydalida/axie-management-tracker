@@ -25,29 +25,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="profile-container">
             <?php echo form_open('Account', 'enctype="multipart/form-data"'); ?>
             <!-- <form method="POST" enctype="multipart/form-data"> -->
-                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-                <div class="profile-picture">
-                    <img src="<?php echo $image; ?>" alt="">
-                    <div class="select-picture">
-                        <i class="bi bi-camera"></i>
-                        <input type="file" name="user_profile" accept="image/*" id="image-picker">
-                    </div>
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+            <div class="profile-picture">
+                <img src="<?php echo $image; ?>" alt="">
+                <div class="select-picture">
+                    <i class="bi bi-camera"></i>
+                    <input type="file" name="user_profile" accept="image/*" id="image-picker">
                 </div>
-                <div class="inputs">
-                    <div class="input">
-                        <h1>First name</h1>
-                        <input type="text" name="first_name" placeholder="First name" value="<?php echo $first_name; ?>" autocomplete="off">
-                    </div>
-                    <div class="input">
-                        <h1>Last name</h1>
-                        <input type="text" name="last_name" placeholder="First name" value="<?php echo $last_name; ?>" autocomplete="off">
-                    </div>
-                    <div class="input">
-                        <h1>Email</h1>
-                        <input type="text" name="email" placeholder="First name" value="<?php echo $email; ?>" autocomplete="off">
-                    </div>
-                    <input type="submit" name="update" value="UPDATE PROFILE">
+            </div>
+            <div class="inputs">
+                <div class="input">
+                    <h1>First name</h1>
+                    <input type="text" name="first_name" placeholder="First name" value="<?php echo $first_name; ?>" autocomplete="off">
                 </div>
+                <div class="input">
+                    <h1>Last name</h1>
+                    <input type="text" name="last_name" placeholder="First name" value="<?php echo $last_name; ?>" autocomplete="off">
+                </div>
+                <div class="input">
+                    <h1>Email</h1>
+                    <input type="text" name="email" placeholder="First name" value="<?php echo $email; ?>" autocomplete="off">
+                </div>
+                <input type="submit" name="update" value="UPDATE PROFILE">
+            </div>
             </form>
         </div>
     </section>
@@ -56,25 +56,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <h2>Password</h2>
         <?php echo form_open('Account'); ?>
         <!-- <form method="POST"> -->
-            <div class="password-container">
-                <div class="new-password">
-                    <div class="input">
-                        <h1>New password</h1>
-                        <input type="password" name="new_password" placeholder="New password">
-                    </div>
-                    <div class="input">
-                        <h1>Confirm new password</h1>
-                        <input type="password" name="cnew_password" placeholder="Confirm new password">
-                    </div>
+        <div class="password-container">
+            <div class="new-password">
+                <div class="input">
+                    <h1>New password</h1>
+                    <input type="password" name="new_password" placeholder="New password">
                 </div>
-                <div class="old-update">
-                    <div class="input">
-                        <h1>Old password</h1>
-                        <input type="password" name="old_password" placeholder="Old password">
-                    </div>
-                    <input type="submit" name="change" value="CHANGE PASSWORD">
+                <div class="input">
+                    <h1>Confirm new password</h1>
+                    <input type="password" name="cnew_password" placeholder="Confirm new password">
                 </div>
             </div>
+            <div class="old-update">
+                <div class="input">
+                    <h1>Old password</h1>
+                    <input type="password" name="old_password" placeholder="Old password">
+                </div>
+                <input type="submit" name="change" value="CHANGE PASSWORD">
+            </div>
+        </div>
         </form>
     </section>
     <section class="errors">
@@ -116,10 +116,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php endif; ?>
 
         <?php if (isset($_SESSION['success'])) : ?>
-            <div class="error">
-                <p>Update Success</p>
-                <button class="close-toast"><i class="bi bi-x"></i></button>
-            </div>
+            <?php if ($_SESSION['success']) : ?>
+                <div class="error">
+                    <p>Update Success</p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+            <?php else : ?>
+                <div class="error error-warning">
+                    <p>No changes were made</p>
+                    <button class="close-toast"><i class="bi bi-x"></i></button>
+                </div>
+            <?php endif; ?>
+
             <?php unset($_SESSION['success']); ?>
         <?php endif; ?>
     </section>

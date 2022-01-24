@@ -32,7 +32,7 @@ class Home extends CI_Controller
 			$data['scholars'] = $this->get_scholars();
 		}
 
-		if(isset($_SESSION['success'])){
+		if (isset($_SESSION['success'])) {
 			$data['update_success'] = $_SESSION['success'];
 			unset($_SESSION['success']);
 		}
@@ -40,15 +40,17 @@ class Home extends CI_Controller
 		$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		$data['user'] = $_SESSION;
 
-		if ($this->form_validation->run() == FALSE){
-            $this->load->view('home', $data);
-        }
-        else{
-			$_SESSION['success'] = true;
-            $this->upload_image();
-			$this->Home_model->update_scholar();
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('home', $data);
+		} else {
+			$this->upload_image();
+			$affected_rows = $this->Home_model->update_scholar();
+			if ($affected_rows > 0)
+				$_SESSION['success'] = true;
+			else
+			$_SESSION['success'] = false;
 			redirect('/Home');
-        }
+		}
 
 		if (isset($_POST['submit'])) {
 			$this->add_scholar($this->valid_address($_POST['address']));

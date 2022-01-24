@@ -25,18 +25,23 @@ class Account extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('account', $_SESSION);
         } else {
-            $_SESSION['success'] = true;
             if (isset($_POST['update'])) {
                 $this->upload_image();
-                $this->Account_model->update_account();
-                $query = $this->Account_model->get_user($_SESSION['user_id']);
-                $_SESSION['first_name'] = $query[0]['first_name'];
-                $_SESSION['last_name'] = $query[0]['last_name'];
-                $_SESSION['email'] = $query[0]['email'];
-                $_SESSION['image'] = $query[0]['image_location'];
-            }
-            else if (isset($_POST['change'])){
+                $affected_row = $this->Account_model->update_account();
+                if ($affected_row > 0) {
+                    $_SESSION['success'] = true;
+                    $query = $this->Account_model->get_user($_SESSION['user_id']);
+                    $_SESSION['first_name'] = $query[0]['first_name'];
+                    $_SESSION['last_name'] = $query[0]['last_name'];
+                    $_SESSION['email'] = $query[0]['email'];
+                    $_SESSION['image'] = $query[0]['image_location'];
+                }
+                else if ($affected_row == 0){
+                    $_SESSION['success'] = false;
+                }
+            } else if (isset($_POST['change'])) {
                 $this->Account_model->change_password($_SESSION['user_id']);
+                $_SESSION['success'] = true;
             }
             redirect('/Account');
         }
@@ -124,7 +129,8 @@ class Account extends CI_Controller
             return false;
     }
 
-    public function test(){
+    public function test()
+    {
         echo 'hello from cross site';
     }
 }

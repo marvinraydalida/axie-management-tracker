@@ -25,6 +25,7 @@ class Account_model extends CI_Model
         unset($_POST['user_id']);
 
         $this->db->update($this->db_table, $_POST);
+        return $this->db->affected_rows();
     }
 
     public function change_password($user_id){

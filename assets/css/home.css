@@ -942,3 +942,12 @@ main{
     background-color: #743535;
     color: #3b1b1b;
 }
+
+.error-warning{
+    background-color: #A2A440;
+}
+
+.error-warning button{
+    background-color: #90922E;
+    color: #5d5e1e;
+}
