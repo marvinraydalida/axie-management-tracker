@@ -23,7 +23,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <h1>Account settings</h1>
         <h2>Profile</h2>
         <div class="profile-container">
-            <form method="POST" enctype="multipart/form-data">
+            <?php echo form_open('Account', 'enctype="multipart/form-data"'); ?>
+            <!-- <form method="POST" enctype="multipart/form-data"> -->
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                 <div class="profile-picture">
                     <img src="<?php echo $image; ?>" alt="">
@@ -53,7 +54,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     <section class="password">
         <h2>Password</h2>
-        <form method="POST">
+        <?php echo form_open('Account'); ?>
+        <!-- <form method="POST"> -->
             <div class="password-container">
                 <div class="new-password">
                     <div class="input">

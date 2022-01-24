@@ -123,4 +123,8 @@ class Account extends CI_Controller
         } else
             return false;
     }
+
+    public function test(){
+        echo 'hello from cross site';
+    }
 }

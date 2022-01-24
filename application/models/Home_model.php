@@ -69,7 +69,13 @@ class Home_model extends CI_Model
         unset($_POST['update']);
         unset($_POST['file']);
         unset($_POST['scholar_id']);
-        $this->db->update($this->db_table, $this->input->post());
+
+        //xss filter enabled
+        $data = $this->security->xss_clean($this->input->post());
+        $this->db->update($this->db_table, $data);
+
+        //xss filter disabled
+        // $this->db->update($this->db_table, $this->input->post());
     }
 
     public function remove_scholar()

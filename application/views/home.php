@@ -34,32 +34,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <h1><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></h1>
             </div>
             <div class="add-scholar-container">
-                <form method="POST">
-                    <input type="text" name="address" placeholder="Enter ronnin address" autocomplete="off">
-                    <button type="submit" value="ADD" name='submit'><i class="bi bi-search"></i></button>
+                <?php echo form_open('Home'); ?>
+                <!-- <form method="POST"> -->
+                <input type="text" name="address" placeholder="Enter ronnin address" autocomplete="off">
+                <button type="submit" value="ADD" name='submit'><i class="bi bi-search"></i></button>
                 </form>
             </div>
 
             <button class="button-hover button-active"><i class="bi bi-person"></i> <a href="Account">My Account</a></button>
-            <form method="POST">
-                <input type="hidden" name="refresh" value="true">
-                <button class="button-hover button-active" type="submit" value="refresh-test"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+            <?php echo form_open('Home'); ?>
+            <!-- <form method="POST"> -->
+            <input type="hidden" name="refresh" value="true">
+            <button class="button-hover button-active" type="submit" value="refresh-test"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
             </form>
         </div>
         <div class="sidebar-bottom">
-            <form method="POST">
+            <?php echo form_open('Home'); ?>
+            <!-- <form method="POST"> -->
                 <input type="hidden" name="logout" value="true">
                 <button class="button-hover button-active" type="submit" value="log-out"><i class="bi bi-door-open"></i> Sign out</button>
             </form>
         </div>
-        <!-- <form method="POST">
-            <input type="hidden" name="refresh" value="true">
-            <input type="submit" value="refresh-test">
-        </form> -->
-        <!-- <form method="POST">
-            <input type="hidden" name="logout" value="true">
-            <input type="submit" value="log-out">
-        </form> -->
     </div>
 
     <main>
@@ -249,62 +244,64 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <section class="modal">
             <div class="edit-modal">
                 <button id="close-edit">X</button>
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="scholar_id" value="" id="scholar_id">
-                    <div class="left-input">
-                        <h1>Edit Scholar</h1>
-                        <div class="img-container">
-                            <img src="" alt="" id="image">
-                            <div class="select-picture">
-                                <i class="bi bi-camera"></i>
-                                <input type="file" name="scholar_profile" accept="image/*" id="image-picker">
-                            </div>
-                        </div>
-                        <div class="edit-input">
-                            <h1>Name</h1>
-                            <input type="text" name="name" placeholder="Full name" autocomplete="off" value="" id="name">
-                        </div>
-                        <div class="edit-input">
-                            <h1>Email</h1>
-                            <input type="text" name="email" placeholder="email" autocomplete="off" value="" id="email">
-                        </div>
-                        <div class="edit-input">
-                            <h1>Contact</h1>
-                            <input type="text" name="contact" placeholder="Contact" autocomplete="off" value="" id="contact">
+                <?php echo form_open('Home', 'enctype="multipart/form-data"'); ?>
+                <!-- <form method="POST" enctype="multipart/form-data"> -->
+                <input type="hidden" name="scholar_id" value="" id="scholar_id">
+                <div class="left-input">
+                    <h1>Edit Scholar</h1>
+                    <div class="img-container">
+                        <img src="" alt="" id="image">
+                        <div class="select-picture">
+                            <i class="bi bi-camera"></i>
+                            <input type="file" name="scholar_profile" accept="image/*" id="image-picker">
                         </div>
                     </div>
-                    <div class="right-input">
-                        <div class="edit-input">
-                            <h1>Daily Quota</h1>
-                            <input type="text" name="quota" placeholder="Daily quota" autocomplete="off" value="" id="quota">
-                        </div>
-                        <div class="edit-input">
-                            <h1>Share</h1>
-                            <input type="text" name="share" placeholder="Share" autocomplete="off" value="" id="share">
-                        </div>
-                        <div class="edit-input">
-                            <h1>Address</h1>
-                            <textarea name="address" placeholder="Address" value="" id="address"></textarea>
-                        </div>
-                        <div class="valid-id-btn">
-                            <p>Valid ID <i class="bi bi-person-badge-fill"></i></p>
-                            <input type="file" name="valid_id" accept="image/*">
-                        </div>
-                        <input type="submit" name="update" value="UPDATE" class="update">
+                    <div class="edit-input">
+                        <h1>Name</h1>
+                        <input type="text" name="name" placeholder="Full name" autocomplete="off" value="" id="name">
                     </div>
+                    <div class="edit-input">
+                        <h1>Email</h1>
+                        <input type="text" name="email" placeholder="email" autocomplete="off" value="" id="email">
+                    </div>
+                    <div class="edit-input">
+                        <h1>Contact</h1>
+                        <input type="text" name="contact" placeholder="Contact" autocomplete="off" value="" id="contact">
+                    </div>
+                </div>
+                <div class="right-input">
+                    <div class="edit-input">
+                        <h1>Daily Quota</h1>
+                        <input type="text" name="quota" placeholder="Daily quota" autocomplete="off" value="" id="quota">
+                    </div>
+                    <div class="edit-input">
+                        <h1>Share</h1>
+                        <input type="text" name="share" placeholder="Share" autocomplete="off" value="" id="share">
+                    </div>
+                    <div class="edit-input">
+                        <h1>Address</h1>
+                        <textarea name="address" placeholder="Address" value="" id="address"></textarea>
+                    </div>
+                    <div class="valid-id-btn">
+                        <p>Valid ID <i class="bi bi-person-badge-fill"></i></p>
+                        <input type="file" name="valid_id" accept="image/*">
+                    </div>
+                    <input type="submit" name="update" value="UPDATE" class="update">
+                </div>
                 </form>
             </div>
 
             <div class="delete-modal">
                 <button id="close-delete">X</button>
-                <form method="POST">
-                    <input type="hidden" name="scholar_id" value="" id="delete_id">
-                    <h1>Are you sure?</h1>
-                    <p>Do you really want to delete this record? <br> this process cannot be undone.</p>
-                    <div class="delete-actions">
-                        <input type="submit" name="delete" value="Confirm">
-                        <input type="submit" name="remove" value="Just remove Scholar">
-                    </div>
+                <?php echo form_open('Home'); ?>
+                <!-- <form method="POST"> -->
+                <input type="hidden" name="scholar_id" value="" id="delete_id">
+                <h1>Are you sure?</h1>
+                <p>Do you really want to delete this record? <br> this process cannot be undone.</p>
+                <div class="delete-actions">
+                    <input type="submit" name="delete" value="Confirm">
+                    <input type="submit" name="remove" value="Just remove Scholar">
+                </div>
                 </form>
             </div>
         </section>

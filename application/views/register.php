@@ -14,7 +14,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <body>
 	<div class="form-container">
-		<form method="POST">
+		<?php echo form_open(); ?>
+		<!-- <form method="POST"> -->
 			<div class="register-input">
 				<div class="input-container">
 					<?php if (empty(form_error('email'))) : ?>

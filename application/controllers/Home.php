@@ -18,25 +18,7 @@ class Home extends CI_Controller
 		$this->config->load('rules');
 		$this->form_validation->set_rules($this->config->item('update_scholar'));
 
-		/*if (isset($_COOKIE['json_scholars'])) {
-			print_r("henlo");
-			$data['scholars_status'] = json_decode($_COOKIE['json_scholars'], true);
-			$this->check_time($data['scholars_status']);
-			$data['scholars'] = $this->get_scholars();
-		} else if (!isset($_COOKIE['json_scholars'])) {
-			print_r("alo");
-			$scholars = $this->get_scholars();
-			$scholar_details = $this->get_scholar_details($scholars);
-			$data['scholars_status'] = $scholar_details;
-			$data['scholars'] = $scholars;
-			if($this->check_time($data['scholars_status'])){
-				$data['scholars'] = $this->get_scholars();
-			}
-		}*/
-
-
 		if (!isset($_SESSION['json_scholars']) || (time() - $_SESSION['time'] > 1200)) {
-			//print_r("alo");
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
 			$data['scholars_status'] = $scholar_details;
@@ -45,7 +27,6 @@ class Home extends CI_Controller
 				$data['scholars'] = $this->get_scholars();
 			}
 		} else {
-			//print_r("henlo");
 			$data['scholars_status'] = json_decode($_SESSION['json_scholars'], true);
 			$this->check_time($data['scholars_status']);
 			$data['scholars'] = $this->get_scholars();
@@ -58,8 +39,6 @@ class Home extends CI_Controller
 
 		$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		$data['user'] = $_SESSION;
-		
-		//$this->load->view('homev2', $data);
 
 		if ($this->form_validation->run() == FALSE){
             $this->load->view('home', $data);
@@ -79,27 +58,16 @@ class Home extends CI_Controller
 		if (isset($_POST['logout'])) {
 			unset($_SESSION);
 			session_destroy();
-			//unset($_COOKIE);
-			//setcookie('json_scholars', '', time() - 3600);
 			redirect('/Login');
 		}
 
 		if (isset($_POST['refresh'])) {
-			//setcookie('json_scholars', '', time() - 3600);
 			$_SESSION['time'] -= 1200;
 			redirect('/Home');
 		}
 
-		// if (isset($_POST['update'])) {
-		// 	$this->upload_image();
-		// 	$this->Home_model->update_scholar();
-		// 	//print_r($_FILES);
-		// 	redirect('/Home');
-		// }
-
 		if (isset($_POST['delete'])) {
 			$this->Home_model->remove_axie_account();
-			//setcookie('json_scholars', '', time() - 3600);
 			$_SESSION['time'] -= 1200;
 			redirect('/Home');
 		}
@@ -143,11 +111,6 @@ class Home extends CI_Controller
 
 		if (isset($scholar['leaderboard']['name'])) {
 			if ($this->Home_model->add_scholar($address, $_SESSION['user_id'])) {;
-				/*if (isset($_COOKIE['json_scholars'])) {
-					$scholars = json_decode($_COOKIE['json_scholars'], true);
-					array_push($scholars, $scholar);
-					setcookie('json_scholars', json_encode($scholars), time() + 1200);
-				}*/
 				if (isset($_SESSION['json_scholars'])) {
 					$scholars = json_decode($_SESSION['json_scholars'], true);
 					array_push($scholars, $scholar);
@@ -205,7 +168,6 @@ class Home extends CI_Controller
 		foreach ($scholars as $scholar) {
 			array_push($scholars_details, $this->request_address($scholar['ronin_address']));
 		}
-		//setcookie('json_scholars', json_encode($scholars_details), time() + 1200);
 		$_SESSION['json_scholars'] = json_encode($scholars_details);
 		$_SESSION['time'] =  time();
 		return $scholars_details;
