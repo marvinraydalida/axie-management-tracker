@@ -82,7 +82,7 @@ class Home extends CI_Controller
 		$init_time = date_create(date('Y-m-d', 	1640995200));
 		$difference = (array)date_diff($time_today, $init_time, true);
 		if ($db[0]['difference'] < $difference['d']) {
-			$this->Home_model->change_time($difference['d'], $scholar_status);
+			$this->Home_model->change_time($difference['d'], $scholar_status, $_SESSION['user_id']);
 			return true;
 		}
 		return false;

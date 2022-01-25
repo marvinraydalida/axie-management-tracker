@@ -14,6 +14,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <script type="application/javascript" src="<?php echo base_url() ?>assets/javascript/currency.js" async></script>
+    <script type="application/javascript" src="<?php echo base_url() ?>assets/javascript/axie.js" async></script>
     <title>Dashboard</title>
 </head>
 
@@ -230,7 +231,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <p class="address"><?php echo $scholars[$index - 1]['address'] ?></p>
                                     </div>
                                 </div>
-
+                                <div class="team" data-ronin="<?php echo $scholars[$index - 1]['ronin_address'] ?>"></div>
                                 <div class="chart-container">
                                     <canvas class="slp-chart" width="300px" height="300px"></canvas>
                                 </div>

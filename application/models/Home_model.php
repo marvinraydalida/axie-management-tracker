@@ -13,9 +13,10 @@ class Home_model extends CI_Model
         return $this->db->get($this->db_time)->result_array();
     }
 
-    public function change_time($new_diff, $scholar_status){
+    public function change_time($new_diff, $scholar_status, $manager_id){
         $this->db->where('id',1);
         $this->db->update($this->db_time,array('difference' => $new_diff));
+        $this->db->where('manager_id',$manager_id);
         $query = $this->db->get($this->db_table);
         $result_array = $query->result_array();
         $index = 0;
