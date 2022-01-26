@@ -35,6 +35,8 @@ class Login extends CI_Controller {
 			$_SESSION['last_name'] = $this->last_name;
 			$_SESSION['image'] = $this->image;
 			$_SESSION['time'] = time();
+			$_SESSION['browser'] = $_SERVER['HTTP_USER_AGENT'];
+			$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 			$this->load->view('loader');
         }
 

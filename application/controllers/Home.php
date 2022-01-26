@@ -7,7 +7,9 @@ class Home extends CI_Controller
 	public function index()
 	{
 		session_start();
-		session_regenerate_id();
+		$this->check_browser();
+		$this->check_ip();
+		session_regenerate_id(true);
 
 		if (!isset($_SESSION['user_id'])) {
 			redirect('/Login');
@@ -31,7 +33,7 @@ class Home extends CI_Controller
 			$this->check_time($data['scholars_status']);
 			$data['scholars'] = $this->get_scholars();
 		}
-		
+
 		$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
 		$data['user'] = $_SESSION;
 
@@ -72,6 +74,24 @@ class Home extends CI_Controller
 		if (isset($_POST['remove'])) {
 			$this->Home_model->remove_scholar();
 			redirect('/Home');
+		}
+	}
+
+	public function check_browser(){
+		if($_SESSION['browser'] != $_SERVER['HTTP_USER_AGENT']){
+			session_regenerate_id();
+			unset($_SESSION);
+			session_destroy();
+			redirect('/Login');
+		}
+	}
+
+	public function check_ip(){
+		if($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+			session_regenerate_id();
+			unset($_SESSION);
+			session_destroy();
+			redirect('/Login');
 		}
 	}
 

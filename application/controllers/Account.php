@@ -7,7 +7,9 @@ class Account extends CI_Controller
     public function index()
     {
         session_start();
-        session_regenerate_id();
+        $this->check_browser();
+		$this->check_ip();
+        session_regenerate_id(true);
 
         if (!isset($_SESSION['user_id'])) {
             redirect('/Login');
@@ -46,6 +48,24 @@ class Account extends CI_Controller
             redirect('/Account');
         }
     }
+
+    public function check_browser(){
+		if($_SESSION['browser'] != $_SERVER['HTTP_USER_AGENT']){
+			session_regenerate_id();
+			unset($_SESSION);
+			session_destroy();
+			redirect('/Login');
+		}
+	}
+
+	public function check_ip(){
+		if($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+			session_regenerate_id();
+			unset($_SESSION);
+			session_destroy();
+			redirect('/Login');
+		}
+	}
 
     public function is_registered($str)
     {
