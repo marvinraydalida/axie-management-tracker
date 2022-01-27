@@ -33,6 +33,13 @@ class Register extends CI_Controller {
         }
 	}
 
+    public function is_registered($str){
+        if($this->Register_model->get_user()){
+            return false;
+        }
+        return true;
+    }
+
     public function validate_first_name($str){
         if (!preg_match("/^[a-zA-Z-' ]*$/",$str)) {
             return false;
