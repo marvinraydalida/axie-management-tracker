@@ -45,7 +45,7 @@ class Login extends CI_Controller {
 	public function registered_email($str){
 		$this->load->model('Login_model');
 		$user = $this->Login_model->get_user($_POST['email']);
-		if(count($user) > 0 && $user[0]['status'] == 'ACTIVE')
+		if(count($user) > 0)
 			return true;
 		else
 			return false;

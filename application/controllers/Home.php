@@ -96,8 +96,8 @@ class Home extends CI_Controller
 	}
 
 	public function check_time($scholar_status)
-	{
-		$db = $this->Home_model->get_time();
+	{	
+		$db = $this->Home_model->get_time($_SESSION['user_id']);
 		$time_today = date_create(date('Y-m-d', time()));
 		$init_time = date_create(date('Y-m-d', 	1640995200));
 		$difference = (array)date_diff($time_today, $init_time, true);

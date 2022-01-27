@@ -5,17 +5,18 @@ class Home_model extends CI_Model
 {
 
     private $db_table = 'scholar';
-    private $db_time = 'time';
+    private $db_users = 'users';
+    //private $db_time = 'time';
 
-
-    public function get_time()
-    {
-        return $this->db->get($this->db_time)->result_array();
+    public function get_time($manager_id)
+    {   
+        $this->db->where('user_id',$manager_id);
+        return $this->db->get($this->db_users)->result_array();
     }
 
     public function change_time($new_diff, $scholar_status, $manager_id){
-        $this->db->where('id',1);
-        $this->db->update($this->db_time,array('difference' => $new_diff));
+        $this->db->where('user_id',$manager_id);
+        $this->db->update($this->db_users,array('difference' => $new_diff));
         $this->db->where('manager_id',$manager_id);
         $query = $this->db->get($this->db_table);
         $result_array = $query->result_array();
@@ -32,6 +33,31 @@ class Home_model extends CI_Model
             $index++;
         }
     }
+
+    // public function get_time()
+    // {
+    //     return $this->db->get($this->db_time)->result_array();
+    // }
+
+    // public function change_time($new_diff, $scholar_status, $manager_id){
+    //     $this->db->where('id',1);
+    //     $this->db->update($this->db_time,array('difference' => $new_diff));
+    //     $this->db->where('manager_id',$manager_id);
+    //     $query = $this->db->get($this->db_table);
+    //     $result_array = $query->result_array();
+    //     $index = 0;
+    //     foreach($result_array as $result){
+    //         $lst = json_decode($result['slp_chart'],true);
+    //         array_shift($lst);
+    //         array_push($lst,array(
+    //             'slp' => $scholar_status[$index]['slp']['yesterdaySLP'],
+    //             'time' => strtotime('today 12am')
+    //         ));
+    //         $this->db->where('scholar_id',$result['scholar_id']);
+    //         $this->db->update($this->db_table,array('slp_chart' => json_encode($lst)));
+    //         $index++;
+    //     }
+    // }
 
     public function get_scholars($manager_id)
     {
