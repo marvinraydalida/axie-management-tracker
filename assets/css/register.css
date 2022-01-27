@@ -135,3 +135,16 @@ span{
     font-family: Arial, Helvetica, sans-serif;
     font-size: .8rem;
 }
+
+#login{
+    margin-left: 10px;
+    margin-bottom: 0px;
+    font-family: 'Nunito', sans-serif;
+}
+
+
+#login a{
+    font-size: 24px;
+    text-decoration: none;
+    color: #D4D9EB;
+}

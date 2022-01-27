@@ -8,6 +8,7 @@ class Login extends CI_Controller {
 	private $email;
 	private $first_name;
 	private $last_name;
+	private $image;
 
 	public function index()
 	{	
@@ -30,8 +31,12 @@ class Login extends CI_Controller {
         else{
 			$_SESSION['user_id'] = $this->user_id;
 			$_SESSION['email'] = $this->email;
-			$_SESSION['first_Name'] = $this->first_name;
+			$_SESSION['first_name'] = $this->first_name;
 			$_SESSION['last_name'] = $this->last_name;
+			$_SESSION['image'] = $this->image;
+			$_SESSION['time'] = time();
+			$_SESSION['browser'] = $_SERVER['HTTP_USER_AGENT'];
+			$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 			$this->load->view('loader');
         }
 
@@ -40,7 +45,7 @@ class Login extends CI_Controller {
 	public function registered_email($str){
 		$this->load->model('Login_model');
 		$user = $this->Login_model->get_user($_POST['email']);
-		if(count($user) > 0 && $user[0]['status'] == 'ACTIVE')
+		if(count($user) > 0)
 			return true;
 		else
 			return false;
@@ -55,6 +60,7 @@ class Login extends CI_Controller {
 				$this->email = $user[0]['email'];
 				$this->first_name = $user[0]['first_name'];
 				$this->last_name = $user[0]['last_name'];
+				$this->image = $user[0]['image_location'];
 				return true;
 			}
 				
@@ -63,5 +69,9 @@ class Login extends CI_Controller {
 		}	
 		else
 			return true;
+			//set to true because error result will overflow e.g. "Wrong password" atop "Wrong Credentials or not registered."
+			//Another example: sample@email.com is a non-existent account (NEA). Since it's non-existing the count($user) > 0 condition
+			//will yield false which will then display "Wrong password" which is a wrong error message if you user entered NEA.
+			//If parent if else statement is removed, error will occur if user entered a non-existent email account.
 	}
 }

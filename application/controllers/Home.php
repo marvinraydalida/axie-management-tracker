@@ -7,30 +7,47 @@ class Home extends CI_Controller
 	public function index()
 	{
 		session_start();
-		session_regenerate_id();
+		$this->check_browser();
+		$this->check_ip();
+		session_regenerate_id(true);
 
 		if (!isset($_SESSION['user_id'])) {
 			redirect('/Login');
 		}
 		$this->load->model('Home_model');
+		$this->load->helper(array('form'));
+		$this->load->library('form_validation');
+		$this->config->load('rules');
+		$this->form_validation->set_rules($this->config->item('update_scholar'));
 
-		if (isset($_COOKIE['json_scholars'])) {
-			print_r("henlo");
-			$data['scholars_status'] = json_decode($_COOKIE['json_scholars'], true);
-			$this->check_time($data['scholars_status']);
-			$data['scholars'] = $this->get_scholars();
-		} else if (!isset($_COOKIE['json_scholars'])) {
-			print_r("alo");
+		if (!isset($_SESSION['json_scholars']) || (time() - $_SESSION['time'] > 1200)) {
 			$scholars = $this->get_scholars();
 			$scholar_details = $this->get_scholar_details($scholars);
 			$data['scholars_status'] = $scholar_details;
 			$data['scholars'] = $scholars;
-			if($this->check_time($data['scholars_status'])){
+			if ($this->check_time($data['scholars_status'])) {
 				$data['scholars'] = $this->get_scholars();
 			}
+		} else {
+			$data['scholars_status'] = json_decode($_SESSION['json_scholars'], true);
+			$this->check_time($data['scholars_status']);
+			$data['scholars'] = $this->get_scholars();
 		}
 
-		$this->load->view('home', $data);
+		$data['average_asc'] = $this->generate_top_three($data['scholars_status']);
+		$data['user'] = $_SESSION;
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('home', $data);
+		} else {
+			$this->upload_image();
+			$affected_rows = $this->Home_model->update_scholar();
+			if ($affected_rows > 0)
+				$_SESSION['success'] = true;
+			else
+				$_SESSION['success'] = false;
+			redirect('/Home');
+		}
 
 		if (isset($_POST['submit'])) {
 			$this->add_scholar($this->valid_address($_POST['address']));
@@ -40,26 +57,17 @@ class Home extends CI_Controller
 		if (isset($_POST['logout'])) {
 			unset($_SESSION);
 			session_destroy();
-			unset($_COOKIE);
-			setcookie('json_scholars', '', time() - 3600);
 			redirect('/Login');
 		}
 
 		if (isset($_POST['refresh'])) {
-			setcookie('json_scholars', '', time() - 3600);
-			redirect('/Home');
-		}
-
-		if (isset($_POST['update'])) {
-			$this->upload_image();
-			$this->Home_model->update_scholar();
-			print_r($_FILES);
+			$_SESSION['time'] -= 1200;
 			redirect('/Home');
 		}
 
 		if (isset($_POST['delete'])) {
 			$this->Home_model->remove_axie_account();
-			setcookie('json_scholars', '', time() - 3600);
+			$_SESSION['time'] -= 1200;
 			redirect('/Home');
 		}
 
@@ -69,14 +77,32 @@ class Home extends CI_Controller
 		}
 	}
 
+	public function check_browser(){
+		if($_SESSION['browser'] != $_SERVER['HTTP_USER_AGENT']){
+			session_regenerate_id();
+			unset($_SESSION);
+			session_destroy();
+			redirect('/Login');
+		}
+	}
+
+	public function check_ip(){
+		if($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+			session_regenerate_id();
+			unset($_SESSION);
+			session_destroy();
+			redirect('/Login');
+		}
+	}
+
 	public function check_time($scholar_status)
 	{	
-		$db = $this->Home_model->get_time();
+		$db = $this->Home_model->get_time($_SESSION['user_id']);
 		$time_today = date_create(date('Y-m-d', time()));
 		$init_time = date_create(date('Y-m-d', 	1640995200));
 		$difference = (array)date_diff($time_today, $init_time, true);
-		if($db[0]['difference'] < $difference['d']){
-			$this->Home_model->change_time($difference['d'], $scholar_status);
+		if ($db[0]['difference'] < $difference['d']) {
+			$this->Home_model->change_time($difference['d'], $scholar_status, $_SESSION['user_id']);
 			return true;
 		}
 		return false;
@@ -96,20 +122,37 @@ class Home extends CI_Controller
 		return $this->Home_model->get_scholars($_SESSION['user_id']);
 	}
 
+
 	public function add_scholar($address)
 	{
 		$scholar = $this->request_address($address);
 
 		if (isset($scholar['leaderboard']['name'])) {
 			if ($this->Home_model->add_scholar($address, $_SESSION['user_id'])) {;
-				if (isset($_COOKIE['json_scholars'])) {
-					$scholars = json_decode($_COOKIE['json_scholars'], true);
+				if (isset($_SESSION['json_scholars'])) {
+					$scholars = json_decode($_SESSION['json_scholars'], true);
 					array_push($scholars, $scholar);
-					setcookie('json_scholars', json_encode($scholars), time() + 1200);
+					$_SESSION['json_scholars'] = json_encode($scholars);
+					$_SESSION['time'] = time();
 				}
 			}
 		}
 	}
+	// public function add_scholar($address)
+	// {
+	// 	$scholar = $this->request_address($address);
+
+	// 	if (isset($scholar['leaderboard']['name'])) {
+	// 		if ($this->Home_model->add_scholar($address, $_SESSION['user_id'])) {;
+	// 			if (isset($_SESSION['json_scholars'])) {
+	// 				$scholars = json_decode($_SESSION['json_scholars'], true);
+	// 				array_push($scholars, $scholar);
+	// 				$_SESSION['json_scholars'] = json_encode($scholars);
+	// 				$_SESSION['time'] = time();
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	public function upload_image()
 	{
@@ -158,7 +201,8 @@ class Home extends CI_Controller
 		foreach ($scholars as $scholar) {
 			array_push($scholars_details, $this->request_address($scholar['ronin_address']));
 		}
-		setcookie('json_scholars', json_encode($scholars_details), time() + 1200);
+		$_SESSION['json_scholars'] = json_encode($scholars_details);
+		$_SESSION['time'] =  time();
 		return $scholars_details;
 	}
 
@@ -183,5 +227,31 @@ class Home extends CI_Controller
 		$result_array = json_decode($response_json, true);
 
 		return $result_array;
+	}
+
+	public function generate_top_three($scholar_status)
+	{
+		$average = array();
+		$index = array();
+		for ($i = 0; $i < count($scholar_status); $i++) {
+			array_push($index, $i);
+		}
+
+		foreach ($scholar_status as $status) {
+			array_push($average, $status['slp']['average']);
+		}
+
+		array_multisort($average, SORT_DESC, $index);
+
+		return $index;
+	}
+
+	public function validate_full_name($str)
+	{
+		if (!preg_match("/^[a-zA-Z-' ]*$/", $str)) {
+			return false;
+		}
+
+		return true;
 	}
 }
