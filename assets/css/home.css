@@ -425,6 +425,7 @@ main {
     height: 100%;
     display: table;
     box-sizing: border-box;
+    position: relative;
 }
 
 .row-col h1 {
@@ -436,6 +437,26 @@ main {
 
 .row-col:first-of-type {
     padding: 0px 10px;
+}
+
+.row-col:last-of-type::before {
+    content: attr(data-unclaimed) "\A" attr(data-wallet) "\A" attr(data-manager);
+    font-size: 1rem;
+    top: 0;
+    left: -100%;
+    background-color: rgba(0, 0, 0, 0.877);
+    border-radius: 5px;
+    padding: 1rem;
+    position: absolute;
+    transform: scale(0);
+    transform-origin: top right;
+    transition: transform 250ms ease-in-out;
+    white-space: pre;
+    z-index: 9;
+}
+
+.row-col:last-of-type:hover::before {
+    transform: scale(1);
 }
 
 .row-hidden {

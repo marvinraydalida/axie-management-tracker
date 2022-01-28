@@ -11,7 +11,17 @@ for(let i = 0; i < ctx.length; i++){
             data: slp_y[i],
             tension: 0.3,
             borderColor: "#1FCB75",
-            label: "QUOTA IN LAST SEVEN DAYS"
+            backgroundColor: '#159B58',
+            radius: 4,
+            hitRadius: 10,
+            label: "SLP"
+        },
+        {
+            data: quota_y[i],
+            borderColor: "#C2C2C2",
+            borderDash: [5,5],
+            radius:0,
+            label: "QUOTA"
         }],
     },
     options: {
