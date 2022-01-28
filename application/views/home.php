@@ -197,10 +197,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </span>
                                     </h1>
                                 </div>
-                                <div class="row-col">
+                                <div class="row-col" 
+                                data-unclaimed="<?php echo 'Unclaimed: ' . abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']); ?>"
+                                data-wallet="<?php echo 'In wallet: ' . $scholar['slp']['claimableTotal'];?>"
+                                data-manager="<?php echo 'Manager: ' . round(abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']) * ((100 - $scholars[$index - 1]['share']) / 100));?>">
                                     <h1><span><?php echo round(abs($scholar['slp']['total'] - $scholar['slp']['claimableTotal']) * ($scholars[$index - 1]['share'] / 100)); ?></span>
                                         <br>
-                                        <span style="font-size: .6rem;" class="share"><?php echo $scholars[$index - 1]['share'] ?>% share</span></i>
+                                        <span style="font-size: .6rem;" class="share"><?php echo $scholars[$index - 1]['share'] ?>% share</span>
                                     </h1>
                                 </div>
                             </div>
@@ -215,7 +218,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <img class="valid-id" src="<?php echo $scholars[$index - 1]['valid_id'] ?>" alt="">
                                     </div>
                                     <div class="profile-information">
-                                        <button class="settings-button"><i class="bi bi-gear-fill"></i></i></button>
+                                        <button class="settings-button"><i class="bi bi-gear-fill"></i></button>
                                         <div class="actions">
                                             <input type="hidden" class="hidden-input" value="<?php echo $scholars[$index - 1]['scholar_id'] ?>">
                                             <button class="edit">Edit <i class="bi bi-pencil-square"></i></button>
@@ -362,16 +365,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php
         $slp_y = array();
         $slp_x = array();
+        $quota_y = array();
         $tmp = array();
+        $quota_tmp = array();
         $total_slp = 0;
 
         for ($i = 0; $i < $index - 1; $i++) {
             $lst = json_decode($scholars[$i]['slp_chart'], true);
             for ($j = 0; $j < 7; $j++) {
                 array_push($tmp, $lst[$j]['slp']);
+                array_push($quota_tmp, $scholars[$i]['quota']);
             }
             array_push($slp_y, $tmp);
+            array_push($quota_y, $quota_tmp);
             $tmp = array();
+            $quota_tmp = array();
         }
 
         for ($i = 0; $i < $index - 1; $i++) {
@@ -391,6 +399,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         var slp_y = <?php echo json_encode($slp_y); ?>;
         var slp_x = <?php echo json_encode($slp_x); ?>;
+        var quota_y = <?php echo json_encode($quota_y); ?>;
         var totalSlp = <?php echo $total_slp; ?>;
         var completed = <?php echo $completed; ?>;
         console.log(totalSlp);
