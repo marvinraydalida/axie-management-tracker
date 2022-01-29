@@ -261,29 +261,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                     </div>
                     <div class="edit-input">
-                        <h1>Name</h1>
+                        <h1>Name <span>*</span></h1>
                         <input type="text" name="name" placeholder="Full name" autocomplete="off" value="" id="name">
                     </div>
                     <div class="edit-input">
-                        <h1>Email</h1>
-                        <input type="text" name="email" placeholder="email" autocomplete="off" value="" id="email">
+                        <h1>Email <span>*</span></h1>
+                        <input type="text" name="email" placeholder="Email" autocomplete="off" value="" id="email">
                     </div>
                     <div class="edit-input">
-                        <h1>Contact</h1>
+                        <h1>Contact <span>*</span></h1>
                         <input type="text" name="contact" placeholder="Contact" autocomplete="off" value="" id="contact">
                     </div>
                 </div>
                 <div class="right-input">
                     <div class="edit-input">
-                        <h1>Daily Quota</h1>
+                        <h1>Daily Quota <span>*</span></h1>
                         <input type="text" name="quota" placeholder="Daily quota" autocomplete="off" value="" id="quota">
                     </div>
                     <div class="edit-input">
-                        <h1>Share</h1>
+                        <h1>Share <span>*</span></h1>
                         <input type="text" name="share" placeholder="Share" autocomplete="off" value="" id="share">
                     </div>
                     <div class="edit-input">
-                        <h1>Address</h1>
+                        <h1>Address <span>*</span></h1>
                         <textarea name="address" placeholder="Address" value="" id="address"></textarea>
                     </div>
                     <div class="valid-id-btn">
