@@ -22,7 +22,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="register-input">
 				<div class="input-container">
 					<?php if (empty(form_error('email'))) : ?>
-						<input type="text" name="email" placeholder="email">
+						<input type="text" name="email" placeholder="Email">
 					<?php else : ?>
 						<input type="text" name="email" placeholder="email" class="error-border">
 						<span><?php echo form_error('email'); ?></span>
@@ -45,8 +45,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<?php endif; ?>
 				</div>
 				<div class="input-container">
+				<p>Note: Password must contain at least 8 charactes, including UPPER/lower case, number and special characters. </p>
 					<?php if (empty(form_error('password'))) : ?>
-						<input type="password" name="password" placeholder="password">
+						<input type="password" name="password" placeholder="Password">
 					<?php else : ?>
 						<input type="password" name="password" placeholder="Password" class="error-border">
 						<span><?php echo form_error('password'); ?></span>

@@ -56,13 +56,7 @@ for (let i = 0; i < rows.length; i++) {
 		scholar_id.setAttribute('value',hiddenInputs[i].getAttribute('value'));
 
 		image_id.setAttribute('src', image_class[i].getAttribute('src'));
-		name_id.setAttribute('value', name_class[i].innerHTML);
-		email_id.setAttribute('value', email_class[i].innerHTML);
-		contact_id.setAttribute('value', contact_class[i].innerHTML);
-		share_id.setAttribute('value', share_class[i].innerHTML.replace('% share',''));
-		quota_id.setAttribute('value', quota_class[i].innerHTML.replace(' Daily quota',''));
 
-		address_id.innerHTML = address_class[i].innerHTML;
 		//console.log(scholar_id.getAttribute('value'));
 	});
 
