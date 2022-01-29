@@ -114,6 +114,11 @@ body {
     position: relative;
 }
 
+.input-container p{
+    margin-top: 0%;
+    color: #e7d3d3;
+}
+
 .input-container span{
     position: absolute;
     top:0;

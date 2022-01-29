@@ -261,30 +261,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                     </div>
                     <div class="edit-input">
-                        <h1>Name</h1>
-                        <input type="text" name="name" placeholder="Full name" autocomplete="off" value="" id="name">
+                        <h1>Name*</h1>
+                        <input type="text" name="name" placeholder="Enter Scholar Name" autocomplete="off" value="" id="name">
                     </div>
                     <div class="edit-input">
-                        <h1>Email</h1>
-                        <input type="text" name="email" placeholder="email" autocomplete="off" value="" id="email">
+                        <h1>Email*</h1>
+                        <input type="text" name="email" placeholder="Enter Scholar Email Address" autocomplete="off" value="" id="email">
                     </div>
                     <div class="edit-input">
-                        <h1>Contact</h1>
-                        <input type="text" name="contact" placeholder="Contact" autocomplete="off" value="" id="contact">
+                        <h1>Contact*</h1>
+                        <input type="text" name="contact" placeholder="Enter Scholar [Tel./Phone No.]" autocomplete="off" value="" id="contact">
                     </div>
                 </div>
                 <div class="right-input">
                     <div class="edit-input">
-                        <h1>Daily Quota</h1>
-                        <input type="text" name="quota" placeholder="Daily quota" autocomplete="off" value="" id="quota">
+                        <h1>Daily Quota*</h1>
+                        <input type="text" name="quota" placeholder="Enter Scholar Daily Quota" autocomplete="off" value="" id="quota">
                     </div>
                     <div class="edit-input">
-                        <h1>Share</h1>
-                        <input type="text" name="share" placeholder="Share" autocomplete="off" value="" id="share">
+                        <h1>Share*</h1>
+                        <input type="text" name="share" placeholder="Enter Scholar Share" autocomplete="off" value="" id="share">
                     </div>
                     <div class="edit-input">
-                        <h1>Address</h1>
-                        <textarea name="address" placeholder="Address" value="" id="address"></textarea>
+                        <h1>Address*</h1>
+                        <textarea name="address" placeholder="Enter Scholar Address" value="" id="address"></textarea>
                     </div>
                     <div class="valid-id-btn">
                         <p>Valid ID <i class="bi bi-person-badge-fill"></i></p>
